@@ -4,6 +4,7 @@ import { NavigationRoutes, SignupValidationSchema } from "../../../constants";
 
 export default useSignup = () => {
     const navigation = useNavigation();
+    const navigateToSignIn = () => navigation.navigate(NavigationRoutes.login);
     const navigateGoBack = () => navigation.goBack();
 
     const initialValues = {
@@ -17,7 +18,6 @@ export default useSignup = () => {
 
     const onSubmit = () => {
         navigation.navigate(NavigationRoutes.signup2)
-        console.log("Pressed")
     };
 
     const formik = useFormik({
@@ -29,6 +29,7 @@ export default useSignup = () => {
     return {
         navigation,
         formik,
+        navigateToSignIn,
         navigateGoBack
     };
 };

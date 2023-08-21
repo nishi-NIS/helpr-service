@@ -1,14 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationRoutes } from '../constants';
-import { LoginScreen, SignupScreen } from '../modules';
-import SignupScreen2 from '../modules/auth/signup/SignupScreen2';
+import { ForgotPasswordOtpScreen, ForgotPasswordScreen, LoginScreen, OTPVerificationScreen, ResetPasswordScreen, SignupScreen, SignupScreen2 } from '../modules';
 
 const AuthStack =  createNativeStackNavigator();
 
 const AuthTopTabs = () => {
     return (
-        <NavigationContainer>
             <AuthStack.Navigator>
                 <AuthStack.Screen
                     name={NavigationRoutes.login}
@@ -31,8 +29,35 @@ const AuthTopTabs = () => {
                         headerShown: false
                     }}
                 />
+                <AuthStack.Screen
+                name={NavigationRoutes.otpScreen}
+                component={OTPVerificationScreen}
+                options={{
+                    headerShown: false
+                }}
+                />
+                <AuthStack.Screen
+                name={NavigationRoutes.forgotScreen}
+                component={ForgotPasswordScreen}
+                options={{
+                    headerShown: false
+                }}
+                />
+                <AuthStack.Screen
+                name={NavigationRoutes.forgotOtpScreen}
+                component={ForgotPasswordOtpScreen}
+                options={{
+                    headerShown: false
+                }}
+                />
+                <AuthStack.Screen
+                name={NavigationRoutes.resetPasswordScreen}
+                component={ResetPasswordScreen}
+                options={{
+                    headerShown: false
+                }}
+                />
             </AuthStack.Navigator>
-        </NavigationContainer>
     );
 };
 

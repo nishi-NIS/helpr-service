@@ -1,15 +1,20 @@
 import React from "react";
 import 'react-native-gesture-handler';
 import { SafeAreaView } from "react-native";
-import { LoginScreen } from "./modules";
+import { LoginScreen, OTPVerificationScreen, SignupScreen } from "./modules";
 import { styles } from "./utils";
-import { AuthTopTabs } from "./navigation";
+import { AppContainer, AuthTopTabs } from "./navigation";
+import SignupScreen2 from "./modules/auth/signup/SignupScreen2";
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container} >
+      {/* <AuthTopTabs /> */}
+      <AppContainer />
       {/* <LoginScreen /> */}
-      <AuthTopTabs />
+      {/* <SignupScreen2 /> */}
+      {/* <SignupScreen /> */}
+      {/* <OTPVerificationScreen /> */}
     </SafeAreaView>
   );
 };

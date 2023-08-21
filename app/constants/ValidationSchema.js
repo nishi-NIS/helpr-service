@@ -36,7 +36,7 @@ export const SignupValidationSchema = Yup.object().shape({
     
     mobileNumber: Yup
     .string()
-    // .matches(Regex.phoneNumber, Strings.invalidNumber)
+    .matches(Regex.phoneNumber, Strings.invalidNumber)
     .required(Strings.mobileRequired),
     
     password: Yup

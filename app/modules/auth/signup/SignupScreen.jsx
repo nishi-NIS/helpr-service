@@ -9,45 +9,46 @@ import { CustomTextInput } from "../../../components";
 import useSignup from "./useSignup";
 
 const SignupScreen = () => {
-    const { formik, navigateGoBack } = useSignup();
+    const { formik, navigateToSignIn, navigateGoBack } = useSignup();
     const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik;
+    const navigation = useNavigation();
 
     return (
         <ScrollView style={styles.main} >
-            <View>
-                <StatusBar
-                    animated={true}
-                    backgroundColor={Colors.statusBar}
-                    networkActivityIndicatorVisible={true}
-                    currentHeight={true}
-                    translucent={true}
-                />
-                <Image
-                    source={Images.loginBG}
-                    style={styles.topImage}
-                />
-                <View style={styles.welcomeView} >
-                    <Text style={styles.welcomeText}>{Strings.createAccount}</Text>
-                    <Text style={styles.subWelcomeText} >{Strings.welcomeText}</Text>
+            <StatusBar
+                animated={true}
+                backgroundColor={Colors.statusBar}
+                networkActivityIndicatorVisible={true}
+                currentHeight={true}
+                translucent={true}
+            />
+            <Image
+                source={Images.loginBG}
+                style={styles.topImage}
+            />
+            <View style={styles.welcomeView} >
+                <Text style={styles.welcomeText}>{Strings.createAccount}</Text>
+                <Text style={styles.subWelcomeText} >{Strings.welcomeText}</Text>
+            </View>
+            <View style={styles.tabTextView} >
+                <Pressable onPress={navigateGoBack} >
+                    <Text style={styles.tabText} >{Strings.signIn}</Text>
+                </Pressable>
+                <Text style={styles.pipeLine} >{Strings.verticalPipe}</Text>
+                <Text style={styles.tabText} >{Strings.signUp}</Text>
+            </View>
+            <View style={styles.uploadOuterView} >
+                <View style={styles.uploadInnerView} >
+                    <Image
+                        source={Images.loginBG}
+                        style={styles.uploadImg}
+                    />
+                    <Text style={styles.uploadText} >
+                        {Strings.uploadPic}
+                    </Text>
                 </View>
-                <View style={styles.tabTextView} >
-                    <Pressable onPress={navigateGoBack} >
-                        <Text style={styles.tabText} >{Strings.signIn}</Text>
-                    </Pressable>
-                    <Text style={styles.pipeLine} >{Strings.verticalPipe}</Text>
-                    <Text style={styles.tabText} >{Strings.signUp}</Text>
-                </View>
-                <View style={styles.uploadOuterView} >
-                    <View style={styles.uploadInnerView} >
-                        <Image
-                            source={Images.loginBG}
-                            style={styles.uploadImg}
-                        />
-                        <Text style={styles.uploadText} >
-                            {Strings.uploadPic}
-                        </Text>
-                    </View>
-                </View>
+            </View>
+            <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
                     <CustomTextInput
                         placeholder={Strings.firstname}
@@ -59,7 +60,7 @@ const SignupScreen = () => {
                         formik={formik}
                         style={styles.textInput}
                     />
-                    <View>
+                    <View style={styles.errorView} >
                         {touched.firstname && errors.firstname && (
                             <Text style={styles.errorText}>
                                 {errors.firstname}
@@ -67,6 +68,8 @@ const SignupScreen = () => {
                         )}
                     </View>
                 </View>
+            </View>
+            <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
                     <CustomTextInput
                         placeholder={Strings.lastname}
@@ -78,7 +81,7 @@ const SignupScreen = () => {
                         formik={formik}
                         style={styles.textInput}
                     />
-                    <View>
+                    <View style={styles.errorView} >
                         {touched.lastname && errors.lastname && (
                             <Text style={styles.errorText}>
                                 {errors.lastname}
@@ -86,6 +89,8 @@ const SignupScreen = () => {
                         )}
                     </View>
                 </View>
+            </View>
+            <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
                     <CustomTextInput
                         placeholder={Strings.email}
@@ -97,7 +102,7 @@ const SignupScreen = () => {
                         formik={formik}
                         style={styles.textInput}
                     />
-                    <View>
+                    <View style={styles.errorView} >
                         {touched.email && errors.email && (
                             <Text style={styles.errorText}>
                                 {errors.email}
@@ -105,6 +110,8 @@ const SignupScreen = () => {
                         )}
                     </View>
                 </View>
+            </View>
+            <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
                     <CustomTextInput
                         placeholder={Strings.mobileNumber}
@@ -116,7 +123,7 @@ const SignupScreen = () => {
                         formik={formik}
                         style={styles.textInput}
                     />
-                    <View>
+                    <View style={styles.errorView} >
                         {touched.mobileNumber && errors.mobileNumber && (
                             <Text style={styles.errorText}>
                                 {errors.mobileNumber}
@@ -124,6 +131,8 @@ const SignupScreen = () => {
                         )}
                     </View>
                 </View>
+            </View>
+            <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
                     <CustomTextInput
                         placeholder={Strings.password}
@@ -135,7 +144,7 @@ const SignupScreen = () => {
                         formik={formik}
                         style={styles.textInput}
                     />
-                    <View>
+                    <View style={styles.errorView} >
                         {touched.password && errors.password && (
                             <Text style={styles.errorText}>
                                 {errors.password}
@@ -143,6 +152,8 @@ const SignupScreen = () => {
                         )}
                     </View>
                 </View>
+            </View>
+            <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
                     <CustomTextInput
                         placeholder={Strings.confirmPassword}
@@ -154,7 +165,7 @@ const SignupScreen = () => {
                         formik={formik}
                         style={styles.textInput}
                     />
-                    <View>
+                    <View style={styles.errorView} >
                         {touched.confirmPassword && errors.confirmPassword && (
                             <Text style={styles.errorText}>
                                 {errors.confirmPassword}
@@ -162,17 +173,20 @@ const SignupScreen = () => {
                         )}
                     </View>
                 </View>
-                <TouchableOpacity onPress={handleSubmit} >
-                    <View style={styles.button} >
-                        <Text style={styles.buttonText}>{Strings.next}</Text>
-                    </View>
-                </TouchableOpacity>
-                <Pressable onPress={navigateGoBack} >
-                    <Text style={styles.createAccount} >
-                        {Strings.haveAccount}
-                    </Text>
-                </Pressable>
             </View>
+            <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.signup2)
+                // handleSubmit
+                // navigation.navigate(NavigationRoutes.signup2)
+            } >
+                <View style={styles.button} >
+                    <Text style={styles.buttonText}>{Strings.next}</Text>
+                </View>
+            </TouchableOpacity>
+            <Pressable onPress={navigateToSignIn} >
+                <Text style={styles.createAccount} >
+                    {Strings.haveAccount}
+                </Text>
+            </Pressable>
         </ScrollView>
     );
 };

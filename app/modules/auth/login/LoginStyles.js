@@ -26,42 +26,49 @@ export const styles = StyleSheet.create({
         fontSize: moderateScale(16),
         color: Colors.black,
         textAlign: "center",
-        marginTop: verticalScale(10)
+        marginTop: verticalScale(25)
     },
     tabTextView: {
         flexDirection: "row",
         justifyContent: "center",
+        marginBottom: verticalScale(10)
     },
     tabText: {
         fontSize: moderateScale(18),
         color: Colors.theme,
-        fontWeight: '500'
+        fontWeight: '500',
+        marginTop: verticalScale(13)
     },
     pipeLine: {
         color: Colors.black,
         fontSize: moderateScale(18),
-        paddingHorizontal: horizontalScale(10)
+        paddingHorizontal: horizontalScale(10),
+        marginTop: verticalScale(13)
+    },
+    outerTextInputView: {
+        marginBottom: verticalScale(12),
     },
     textInputView: {
+        paddingHorizontal: horizontalScale(10),
+        marginHorizontal: horizontalScale(10),
         borderWidth: moderateScale(1),
         borderColor: Colors.theme,
-        width: horizontalScale(325),
-        alignSelf: "center",
         height: verticalScale(50),
-        marginVertical: verticalScale(15),
-        borderRadius: moderateScale(8)
+        borderRadius: moderateScale(8),
+        backgroundColor: Colors.offWhite,
     },
     textInput: {
         fontSize: moderateScale(16),
         color: Colors.black,
         fontWeight: '400',
-        flex: 1
+        flex: 1,
+    },
+    errorView: {
+        paddingHorizontal: horizontalScale(4)
     },
     errorText: {
-        marginHorizontal: horizontalScale(6),
         color: Colors.red,
-        fontSize: moderateScale(12),
-        margin: moderateScale(6)
+        fontSize: moderateScale(10),
     },
     rememberMeView: {
         flexDirection: 'row',

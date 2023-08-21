@@ -1,2 +1,2 @@
 export { LoginScreen } from './login';
-export { SignupScreen } from './signup';
+export { SignupScreen, SignupScreen2 } from './signup';

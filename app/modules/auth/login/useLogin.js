@@ -8,6 +8,7 @@ export const useLogin = () => {
     const [isSelected, setIsSelected] = React.useState(false);
 
     const navigateToSignup = () => navigation.navigate(NavigationRoutes.signup);
+    const navigateToForgotPassword = () => navigation.navigate(NavigationRoutes.forgotScreen)
 
     const initialValues = {
         email: '',
@@ -15,7 +16,8 @@ export const useLogin = () => {
     };
 
     const onSubmit = () => {
-        console.log("Pressed")
+        // console.log("Pressed");
+        navigation.navigate(NavigationRoutes.drawerRoutes);
     };
 
     const formik = useFormik({
@@ -29,6 +31,7 @@ export const useLogin = () => {
         navigation,
         isSelected,
         setIsSelected,
-        navigateToSignup
+        navigateToSignup,
+        navigateToForgotPassword
     };
 };
