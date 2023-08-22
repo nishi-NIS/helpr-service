@@ -120,19 +120,19 @@ const OTPVerificationScreen = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                        <Text style={styles.otpText} >{Strings.otp}</Text>
-                    {/* <OTPInputView
-                        style={{ width: '80%', height: 50 }}
+                    <Text style={styles.otpText} >{Strings.otp}</Text>
+                    <OTPInputView
+                        style={{ width: '80%', height: verticalScale(50) }}
                         pinCount={4}
                         autoFocusOnLoad={false}
                         codeInputFieldStyle={styles.underlineStyleBase}
                         codeInputHighlightStyle={styles.underlineStyleHighLighted}
                         onCodeChanged={code => setCode(code)}
                         code={code}
-                    /> */}
+                    />
                 </View>
                 <View style={styles.rememberMeView}>
-                    {showResendButton && (
+                    {/* {showResendButton && ( */}
                         <View style={styles.forgotPassword}>
                             <Text
                                 style={{ color: Colors.theme, textDecorationLine: 'underline' }}
@@ -140,13 +140,14 @@ const OTPVerificationScreen = () => {
                                 {Strings.resend}
                             </Text>
                         </View>
-                    )}
+                    {/* )} */}
                 </View>
                 <Pressable
-                    style={styles.button}
                     disabled={code.length < 4}
                     onPress={onOtpSubmit}>
+                        <View style={styles.button}>
                     <Text style={styles.buttonText}>{Strings.verify}</Text>
+                    </View>
                 </Pressable>
                 {ErrorMessage && (
                     <Text

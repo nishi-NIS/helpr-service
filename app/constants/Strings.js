@@ -32,8 +32,8 @@ export default {
     maxName: 'Maximum limit reached',
     invalidNumber: 'Mobile Number is invalid',
     signup2: 'Sign Up - Step 2',
-    verifyOTP: 'Verify Email and Mobile OTP',
-    otpHead: 'OTP has been sent on Mail & Phone No.',
+    verifyOTP: 'Verify Email OTP',
+    otpHead: 'OTP has been sent on Email',
     otp: 'OTP',
     resend: 'Resend?',
     forgotPassword: 'Forgot Password',
@@ -42,4 +42,5 @@ export default {
     backToLogin: 'Back to Login Page',
     resetPassword: 'Reset Password',
     submit: 'Submit',
+    subscription: 'Subscription',
 };

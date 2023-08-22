@@ -39,6 +39,18 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
         marginTop: verticalScale(13)
     },
+    focusedText: {
+        fontSize: moderateScale(18),
+        color: Colors.theme,
+        fontWeight: '500',
+        marginTop: verticalScale(13)
+    },
+    unFocusedText: {
+        fontSize: moderateScale(18),
+        color: Colors.black,
+        fontWeight: '500',
+        marginTop: verticalScale(13)
+    },
     pipeLine: {
         color: Colors.black,
         fontSize: moderateScale(18),

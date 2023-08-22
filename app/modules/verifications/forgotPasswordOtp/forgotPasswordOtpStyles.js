@@ -28,7 +28,20 @@ export const styles = StyleSheet.create({
     otpText: {
         color: Colors.theme,
         fontWeight: '600',
-        fontSize: moderateScale(17)
+        fontSize: moderateScale(17),
+        marginBottom: verticalScale(10)
+    },
+    underlineStyleBase: {
+        width: horizontalScale(65),
+        borderWidth: moderateScale(1),
+        borderColor: Colors.theme,
+        borderRadius: moderateScale(10),
+        color: Colors.black,
+        backgroundColor: Colors.offWhite
+    },
+
+    underlineStyleHighLighted: {
+        borderColor: Colors.theme,
     },
     errorText: {
         marginHorizontal: horizontalScale(20),
@@ -61,7 +74,7 @@ export const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '600',
     },
-     rememberMeView: {
+    rememberMeView: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -72,8 +85,9 @@ export const styles = StyleSheet.create({
         marginLeft: horizontalScale(20),
     },
     forgotPassword: {
-            flex: 1,
-            alignItems: 'flex-end',
-            marginRight: horizontalScale(20),
-        },
+        flex: 1,
+        alignItems: 'flex-end',
+        marginRight: horizontalScale(40),
+        marginTop: verticalScale(5)
+    },
 });

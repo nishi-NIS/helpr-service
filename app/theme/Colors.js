@@ -8,4 +8,6 @@ export const Colors = {
     red: "#FF0000",
     statusBar: "#5F1FA0",
     offWhite: "#FBF7FB",
+    inactiveTintColor: "#222222",
+    tabBackground: "#f0e6f0",
 };

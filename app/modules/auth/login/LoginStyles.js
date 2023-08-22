@@ -33,9 +33,15 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         marginBottom: verticalScale(10)
     },
-    tabText: {
+    focusedText: {
         fontSize: moderateScale(18),
         color: Colors.theme,
+        fontWeight: '500',
+        marginTop: verticalScale(13)
+    },
+    unFocusedText: {
+        fontSize: moderateScale(18),
+        color: Colors.black,
         fontWeight: '500',
         marginTop: verticalScale(13)
     },
@@ -78,7 +84,8 @@ export const styles = StyleSheet.create({
     },
     rememberMe: {
         flex: 1,
-        marginLeft: horizontalScale(20),
+        marginLeft: horizontalScale(4),
+        marginTop: verticalScale(-8)
     },
     label: {
         marginVertical: verticalScale(8),
@@ -96,7 +103,7 @@ export const styles = StyleSheet.create({
     forgotPassword: {
         flex: 1,
         alignItems: 'flex-end',
-        marginRight: horizontalScale(28),
+        marginRight: horizontalScale(14),
     },
     forgetPasswordText: {
         color: Colors.theme,

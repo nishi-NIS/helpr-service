@@ -302,15 +302,16 @@
 
 import * as React from 'react';
 import { View, Text, ScrollView, StatusBar, Image, Pressable, Dimensions } from "react-native";
-import { Colors } from "../../../theme";
+import { Colors, verticalScale } from "../../../theme";
 import Images from "../../../assests";
 import { styles } from "./forgotPasswordOtpStyles";
 import { NavigationRoutes, Strings } from "../../../constants";
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { API_URL } from '../../../config';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 const ForgotPasswordOtpScreen = () => {
-      const navigation = useNavigation();
+  const navigation = useNavigation();
   const [code, setCode] = React.useState('');
   const [showResendButton, setShowResendButton] = React.useState(false);
   const [ErrorMessage, setErrorMessage] = React.useState('');
@@ -386,73 +387,74 @@ const ForgotPasswordOtpScreen = () => {
       .catch(error => console.log('error', error));
   };
 
-    return (
-        <ScrollView style={styles.main} >
-            <StatusBar
-                animated={true}
-                backgroundColor={Colors.statusBar}
-                networkActivityIndicatorVisible={true}
-                currentHeight={true}
-                translucent={true}
-            />
-            <Image
-                source={Images.loginBG}
-                style={styles.topImage}
-            />
-            <View style={styles.container}>
-                <Text style={styles.welcomeText}>{Strings.forgotPassword}</Text>
-                <Text style={styles.welcomeInfo}>
-                    {Strings.otpHead}
-                </Text>
-            </View>
-            <View
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                <Text style={styles.otpText} >{Strings.otp}</Text>
-                {/* <OTPInputView
-                        style={{ width: '80%', height: 50 }}
-                        pinCount={4}
-                        autoFocusOnLoad={false}
-                        codeInputFieldStyle={styles.underlineStyleBase}
-                        codeInputHighlightStyle={styles.underlineStyleHighLighted}
-                        onCodeChanged={code => setCode(code)}
-                        code={code}
-                    /> */}
-            </View>
-            <View style={styles.rememberMeView}>
-                    {showResendButton && (
-                        <View style={styles.forgotPassword}>
-                            <Text
-                                style={{ color: Colors.theme, textDecorationLine: 'underline' }}
-                                onPress={onResend}>
-                                {Strings.resend}
-                            </Text>
-                        </View>
-                    )}
-                </View>
-            <Pressable style={styles.button}
-                 onPress={
-                    () => navigation.navigate(NavigationRoutes.resetPasswordScreen)
-                    // formik.handleSubmit
-                    }>
-                    <Text style={styles.buttonText}>{Strings.verify}</Text>
-                </Pressable>
-                {ErrorMessage && (
-                    <Text
-                        style={styles.error}>
-                        {ErrorMessage}
-                    </Text>
-                )}
+  return (
+    <ScrollView style={styles.main} >
+      <StatusBar
+        animated={true}
+        backgroundColor={Colors.statusBar}
+        networkActivityIndicatorVisible={true}
+        currentHeight={true}
+        translucent={true}
+      />
+      <Image
+        source={Images.loginBG}
+        style={styles.topImage}
+      />
+      <View style={styles.container}>
+        <Text style={styles.welcomeText}>{Strings.forgotPassword}</Text>
+        <Text style={styles.welcomeInfo}>
+          {Strings.otpHead}
+        </Text>
+      </View>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+        <Text style={styles.otpText} >{Strings.otp}</Text>
+        <OTPInputView
+          style={{ width: '80%', height: verticalScale(50) }}
+          pinCount={4}
+          autoFocusOnLoad={false}
+          codeInputFieldStyle={styles.underlineStyleBase}
+          codeInputHighlightStyle={styles.underlineStyleHighLighted}
+          onCodeChanged={code => setCode(code)}
+          code={code}
+        />
+      </View>
+      <View style={styles.rememberMeView}>
+        {/* {showResendButton && ( */}
+        <View style={styles.forgotPassword}>
+          <Text
+            style={{ color: Colors.theme, textDecorationLine: 'underline' }}
+          // onPress={onResend}
+          >
+            {Strings.resend}
+          </Text>
+        </View>
+        {/* )} */}
+      </View>
+      <Pressable style={styles.button}
+        onPress={
+          () => navigation.navigate(NavigationRoutes.resetPasswordScreen)
+          // formik.handleSubmit
+        }>
+        <Text style={styles.buttonText}>{Strings.verify}</Text>
+      </Pressable>
+      {ErrorMessage && (
+        <Text
+          style={styles.error}>
+          {ErrorMessage}
+        </Text>
+      )}
 
-            <Text
-                style={styles.createAccount}
-                onPress={() => navigation.navigate(NavigationRoutes.login)}>
-                {Strings.backToLogin}
-            </Text>
-        </ScrollView>
-    );
+      <Text
+        style={styles.createAccount}
+        onPress={() => navigation.navigate(NavigationRoutes.login)}>
+        {Strings.backToLogin}
+      </Text>
+    </ScrollView>
+  );
 };
 
 export default ForgotPasswordOtpScreen;

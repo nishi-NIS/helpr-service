@@ -129,15 +129,15 @@ const ForgotPasswordScreen = () => {
                         {formik.errors.email}
                     </Text>
                 )}
-                <View style={styles.button}>
                     <Pressable
                         onPress={
                             () => navigation.navigate(NavigationRoutes.forgotOtpScreen)
                             // formik.handleSubmit
                         }>
+                            <View style={styles.button}>
                         <Text style={styles.buttonText}>{Strings.forgot}</Text>
-                    </Pressable>
                 </View>
+                    </Pressable>
                 {ErrorMessage && (
                     <Text
                         style={styles.error}>

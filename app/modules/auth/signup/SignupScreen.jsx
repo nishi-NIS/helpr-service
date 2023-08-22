@@ -12,6 +12,7 @@ const SignupScreen = () => {
     const { formik, navigateToSignIn, navigateGoBack } = useSignup();
     const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik;
     const navigation = useNavigation();
+    const focused = true;
 
     return (
         <ScrollView style={styles.main} >
@@ -32,10 +33,10 @@ const SignupScreen = () => {
             </View>
             <View style={styles.tabTextView} >
                 <Pressable onPress={navigateGoBack} >
-                    <Text style={styles.tabText} >{Strings.signIn}</Text>
+                    <Text style={focused == false ? styles.focusedText : styles.unFocusedText} >{Strings.signIn}</Text>
                 </Pressable>
                 <Text style={styles.pipeLine} >{Strings.verticalPipe}</Text>
-                <Text style={styles.tabText} >{Strings.signUp}</Text>
+                <Text style={focused == true ? styles.focusedText : styles.unFocusedText} >{Strings.signUp}</Text>
             </View>
             <View style={styles.uploadOuterView} >
                 <View style={styles.uploadInnerView} >

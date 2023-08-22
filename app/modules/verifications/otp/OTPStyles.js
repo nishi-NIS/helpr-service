@@ -22,16 +22,14 @@ export const styles = StyleSheet.create({
     borderStyleHighLighted: {
         borderColor: Colors.black,
     },
-
     underlineStyleBase: {
-        width: horizontalScale(75),
-        height: verticalScale(45),
+        width: horizontalScale(65),
         borderWidth: moderateScale(1),
         borderColor: Colors.theme,
         borderRadius: moderateScale(10),
         color: Colors.black,
+        backgroundColor: Colors.offWhite
     },
-
     underlineStyleHighLighted: {
         borderColor: Colors.theme,
     },
@@ -121,7 +119,7 @@ export const styles = StyleSheet.create({
         padding: moderateScale(15),
         marginBottom: verticalScale(10),
         borderRadius: moderateScale(10),
-        marginTop: (verticalScale),
+        marginTop: verticalScale(20),
     },
     buttonText: {
         color: Colors.white,

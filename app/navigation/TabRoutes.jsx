@@ -4,6 +4,10 @@ import { View, Text } from "react-native";
 import { NavigationRoutes } from "../constants";
 import { AnimatedTabBarNavigator } from "react-native-animated-nav-tab-bar";
 import Folder from 'react-native-vector-icons/Feather';
+import Home from 'react-native-vector-icons/AntDesign';
+import { Briefcase, ChatCircleDots, House, User } from "phosphor-react-native";
+import { Colors, moderateScale } from "../theme";
+import { Subscription } from "../modules";
 
 const BottomTab = AnimatedTabBarNavigator();
 
@@ -12,25 +16,20 @@ const TabRoutes = () => {
         <BottomTab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
-                // tabBarStyle:
             }}
             tabBarOptions={{
-                activeTintColor: "#2F7C6E",
-                inactiveTintColor: "#222222"
+                activeTintColor: Colors.black,
+                inactiveTintColor: Colors.inactiveTintColor,
+                activeBackgroundColor: Colors.tabBackground
               }}
         >
             <BottomTab.Screen
                 name={NavigationRoutes.home}
-                component={() => <Text>Home</Text>}
+                component={Subscription}
                 options={{
-                    tabBarIcon: ({ focused, color, size }) => (
-                        <Folder
-                            name="Home"
-                            size={size ? size : 24}
-                            color={focused ? color : "#222222"}
-                            focused={focused}
-                            // color={color}
-                        />
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <House size={moderateScale(28)} color={Colors.theme} weight="fill" />
                     )
                   }}
             />
@@ -38,21 +37,30 @@ const TabRoutes = () => {
                 name={NavigationRoutes.jobs}
                 component={() => <Text>Jobs</Text>}
                 options={{
-                    headerShown: false
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <Briefcase size={moderateScale(28)} color={Colors.theme} weight="fill" />
+                    )
                 }}
             />
             <BottomTab.Screen
                 name={NavigationRoutes.chat}
                 component={() => <Text>Chat</Text>}
                 options={{
-                    headerShown: false
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <ChatCircleDots size={moderateScale(28)} color={Colors.theme} weight="fill" />
+                    )
                 }}
             />
             <BottomTab.Screen
                 name={NavigationRoutes.profile}
                 component={() => <Text>Profile</Text>}
                 options={{
-                    headerShown: false
+                    headerShown: false,
+                    tabBarIcon: () => (
+                        <User size={moderateScale(28)} color={Colors.theme} weight="fill" />
+                    )
                 }}
             />
         </BottomTab.Navigator>

@@ -17,7 +17,7 @@ export const useLogin = () => {
 
     const onSubmit = () => {
         // console.log("Pressed");
-        navigation.navigate(NavigationRoutes.drawerRoutes);
+        navigation.replace(NavigationRoutes.drawerRoutes);
     };
 
     const formik = useFormik({

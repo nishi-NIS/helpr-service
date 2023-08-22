@@ -1,16 +1,23 @@
 import CheckBox from "@react-native-community/checkbox";
-import React from "react";
+import React, { useState } from "react";
 import { Image, Pressable, ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import Images from "../../../assests";
 import { CustomTextInput } from "../../../components";
-import { Colors, verticalScale } from "../../../theme";
+import { Colors, moderateScale, verticalScale } from "../../../theme";
 import { styles } from "./LoginStyles";
 import { useLogin } from "./useLogin";
 import { Strings } from "../../../constants";
+import { Eye, EyeClosed, EyeSlash, Heart } from 'phosphor-react-native';
 
 const LoginScreen = () => {
     const { formik, isSelected, setIsSelected, navigateToSignup, navigateToForgotPassword } = useLogin();
     const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik;
+    const focused = true;
+    const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+    const toggleSecureText = () => {
+        setSecureTextEntry((prevState) => !prevState)
+    };
 
     return (
         <ScrollView style={styles.main} >
@@ -30,10 +37,10 @@ const LoginScreen = () => {
                 <Text style={styles.subWelcomeText} >{Strings.welcomeText}</Text>
             </View>
             <View style={styles.tabTextView} >
-                <Text style={styles.tabText} >{Strings.signIn}</Text>
+                <Text style={focused == true ? styles.focusedText : styles.unFocusedText} >{Strings.signIn}</Text>
                 <Text style={styles.pipeLine} >{Strings.verticalPipe}</Text>
                 <Pressable onPress={navigateToSignup} >
-                    <Text style={styles.tabText} >{Strings.signUp}</Text>
+                    <Text style={focused == false ? styles.focusedText : styles.unFocusedText} >{Strings.signUp}</Text>
                 </Pressable>
             </View>
             <View style={styles.outerTextInputView} >
@@ -58,24 +65,35 @@ const LoginScreen = () => {
                 </View>
             </View>
             <View style={styles.outerTextInputView} >
-            <View style={styles.textInputView} >
-                <CustomTextInput
-                    placeholder={Strings.password}
-                    secureTextEntry={true}
-                    keyboardType="default"
-                    name="password"
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    formik={formik}
-                    style={styles.textInput}
-                />
+                <View style={styles.textInputView} >
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }} >
+                        <CustomTextInput
+                            placeholder={Strings.password}
+                            secureTextEntry={secureTextEntry}
+                            keyboardType="default"
+                            name="password"
+                            handleChange={handleChange}
+                            handleBlur={handleBlur}
+                            formik={formik}
+                            style={styles.textInput}
+                        />
+                        <View style={{alignSelf: "center"}} >
+                        <Pressable onPress={toggleSecureText} >
+                            {secureTextEntry ?
+                                <Eye color={Colors.gray} weight="regular" size={moderateScale(20)} />
+                                :
+                                <EyeSlash color={Colors.gray} weight="regular" size={moderateScale(20)} />
+                            }
+                        </Pressable>
+                        </View>
+                    </View>
                     <View style={styles.errorView} >
-                {touched.password && errors.password && (
-                        <Text style={styles.errorText}>
-                            {errors.password}
-                        </Text>
-                )}
-                </View>
+                        {touched.password && errors.password && (
+                            <Text style={styles.errorText}>
+                                {errors.password}
+                            </Text>
+                        )}
+                    </View>
                 </View>
             </View>
             <View style={styles.rememberMeView}>
