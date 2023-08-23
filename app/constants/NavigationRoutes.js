@@ -13,4 +13,7 @@ export default {
     chat: 'Chat',
     profile: 'Profile',
     tabRoutes: 'TabRoutes',
+    profileStack: 'ProfileStack',
+    profileScreen: 'ProfileScreen',
+    editDetailsScreen: 'EditDetailsScreen',
 };

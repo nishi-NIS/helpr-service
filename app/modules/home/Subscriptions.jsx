@@ -1,179 +1,128 @@
 import React from "react";
-import { Text, Dimensions, View, TextInput, TouchableHighlight, TouchableOpacity } from "react-native";
+import { Text, Dimensions, View, TextInput, ScrollView, Pressable } from "react-native";
 import Carousel from 'react-native-reanimated-carousel';
 import { Strings } from "../../constants";
 import { styles } from "./SubscriptionsStyles";
-import { CaretLeft } from "phosphor-react-native";
-import { Colors, moderateScale } from "../../theme";
+import { CaretLeft, CaretRight } from "phosphor-react-native";
+import { Colors, horizontalScale, moderateScale, verticalScale } from "../../theme";
+import { CarouselCard } from "./components";
 
 const Subscription = () => {
-    const width = Dimensions.get('window').width - 30;
-    const carouselItems = [...new Array(3).keys()];
+  const width = Dimensions.get('window').width;
+  const carouselItems = [...new Array(3).keys()];
+  const [activeSlide, setActiveSlide] = React.useState(0);
 
-    const renderItem = ({item, index}) => {
-        return (
-          <View
-            style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: 10,
-              height: 650,
-              padding: 15,
-              shadowColor: '#00000026',
-              shadowOpacity: 1,
-              shadowOffset: {width: -2, height: 4},
-              shadowOpacity: 1,
-              shadowRadius: 3,
-            }}
-            key={index}>
-            <Text
-              style={{
-                fontSize: 26,
-                lineHeight: 26,
-                color: '#7F29D6',
-                fontWeight: '700',
-              }}>
-              {item.name}
-            </Text>
-            <Text
-              style={{
-                fontSize: 40,
-                fontWeight: 600,
-                lineHeight: 40,
-                letterSpacing: 0,
-                textAlign: 'left',
-                marginTop: 20,
-              }}>
-              ${item.price}/<Text style={{fontSize: 25}}>m</Text>
-            </Text>
-    
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 700,
-                lineHeight: 21,
-                letterSpacing: 0,
-                textAlign: 'left',
-                marginTop: 10,
-              }}>
-              This plan Includes:
-            </Text>
-            <View style={{marginTop: 5}}>
-              {item.description ? (
-                item.description.map((item1, index1) => (
-                  <Text style={{padding: 5}} key={index1 + '' + index}>
-                    <Ionicons
-                      name="caret-forward-sharp"
-                      color={'#7F29D6'}
-                      size={15}
-                    />
-                    <Text
-                      style={{fontWeight: '400', fontSize: 16, lineHeight: 20.96}}>
-                      {item1}
-                    </Text>
-                  </Text>
-                ))
-              ) : (
-                <></>
-              )}
-            </View>
-            <View style={{flex: 1, justifyContent: 'flex-end'}}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <View style={{flex: 1}}>
-                  <TextInput
-                    placeholderTextColor={'black'}
-                    style={[
-                      styles.input,
-                      {
-                        borderTopLeftRadius: 5,
-                        borderBottomLeftRadius: 5,
-                      },
-                    ]}
-                    onChangeText={searchString => {
-                      console.log('searchString', searchString);
-                    }}
-                    placeholder="Apply Promo Code"
-                  />
-                </View>
-                <TouchableHighlight
-                  style={[
-                    styles.input,
-                    {
-                      flex: 0, // Set flex to 0 to prevent expanding
-                      borderTopRightRadius: 5,
-                      borderBottomRightRadius: 5,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: '#7F29D6',
-                      width: 70,
-                    },
-                  ]}
-                  onPress={() => {}}>
-                  <View>
-                    <Text style={{color: 'white'}}>Apply</Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#7F29D6',
-                  padding: 10,
-                  marginTop: 15,
-                  textAlign: 'center',
-                  borderRadius: 5,
-                }}
-                onPress={this.navigateToProfile}>
-                <View>
-                  <Text style={{color: 'white', textAlign: 'center'}}>Pay Now</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        );
-      };
+  const handleSlideChange = index => {
+    setActiveSlide(index);
+  };
 
+  const renderItem = ({ item, index }) => {
     return (
-        <>
-            <View style={styles.headerView} >
-                <CaretLeft size={moderateScale(20)} weight="bold" color={Colors.black} style={styles.caretLeft} />
-                <Text style={styles.subscriptionText} >{Strings.subscription}</Text>
-                <Text></Text>
-            </View>
-            <View style={{ flex: 1, alignSelf: "center" }}>
-                <Carousel
-                    loop
-                    width={width}
-                    // height={width / 2}
-                    // autoPlay={true}
-                    data={carouselItems}
-                    mode="parallax"
-                    scrollAnimationDuration={1000}
-                    onSnapToItem={(index) => console.log('current index:', index)}
-                    panGestureHandlerProps={{
-                        activeOffsetX: [-10, 10],
-                    }}
-                    renderItem={renderItem}
-                    // renderItem={({ index }) => (
-                    //     <View
-                    //         style={{
-                    //             flex: 1,
-                    //             borderWidth: 1,
-                    //             justifyContent: 'center',
-                    //         }}
-                    //     >
-                    //         <Text style={{ textAlign: 'center', fontSize: 30 }}>
-                    //             {index}
-                    //         </Text>
-                    //     </View>
-                    // )}
-                />
-            </View>
-        </>
+      <View
+        style={styles.container}
+        key={index}
+      >
+        {index == 0 ? (
+          <CarouselCard
+            header={Strings.premium}
+            price={Strings.price1}
+            mText={Strings.m}
+            planIncludes={Strings.planIncludes}
+            text1={Strings.text1}
+            text2={Strings.text2}
+            text3={Strings.text3}
+            text4={Strings.text4}
+            text5={Strings.text5}
+            text6={Strings.text6}
+            text7={Strings.text7}
+            text8={Strings.text8}
+            applyCode={Strings.applyCode}
+            apply={Strings.apply}
+            payNow={Strings.payNow}
+          />
+        )
+          : index == 1 ?
+            (
+              <CarouselCard
+                header={Strings.standard}
+                price={Strings.price2}
+                mText={Strings.m}
+                planIncludes={Strings.planIncludes}
+                text1={Strings.text1}
+                text2={Strings.text2}
+                text3={Strings.text3}
+                text4={Strings.text4}
+                text5={Strings.text5}
+                text6={Strings.text6}
+                text7={Strings.text7}
+                text8={Strings.text8}
+                applyCode={Strings.applyCode}
+                apply={Strings.apply}
+                payNow={Strings.payNow}
+              />
+            )
+            :
+            (
+              <CarouselCard
+                header={Strings.basic}
+                price={Strings.price3}
+                mText={Strings.m}
+                planIncludes={Strings.planIncludes}
+                text1={Strings.text1}
+                text2={Strings.text2}
+                text3={Strings.text3}
+                text4={Strings.text4}
+                text5={Strings.text5}
+                text6={Strings.text6}
+                text7={Strings.text7}
+                text8={Strings.text8}
+                applyCode={Strings.applyCode}
+                apply={Strings.apply}
+                payNow={Strings.payNow}
+              />
+            )
+        }
+      </View>
+
     );
+  };
+
+  return (
+    <>
+      <View style={styles.headerView} >
+        <CaretLeft size={moderateScale(20)} weight="bold" color={Colors.black} />
+        <Text style={styles.subscriptionText} >{Strings.subscription}</Text>
+        <Text></Text>
+      </View>
+      <View style={styles.carouselView}>
+        <Carousel
+          loop
+          width={width}
+          // autoPlay={true}
+          data={carouselItems}
+          mode="parallax"
+          scrollAnimationDuration={1000}
+          // onSnapToItem={(index) => console.log('current index:', index)}
+          onSnapToItem={handleSlideChange}
+          // panGestureHandlerProps={{
+          //   activeOffsetX: [-10, 10],
+          // }}
+          renderItem={renderItem}
+        />
+      </View>
+        <View style={styles.paginationDots}>
+        {carouselItems.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.paginationDot,
+              index === activeSlide ? styles.activeDot : null,
+            ]}
+          />
+        ))}
+      </View>
+    </>
+  );
 };
 
 export default Subscription;

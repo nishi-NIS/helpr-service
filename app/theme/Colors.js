@@ -10,4 +10,5 @@ export const Colors = {
     offWhite: "#FBF7FB",
     inactiveTintColor: "#222222",
     tabBackground: "#f0e6f0",
+    starColor: "#aea808",
 };

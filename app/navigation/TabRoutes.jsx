@@ -7,7 +7,8 @@ import Folder from 'react-native-vector-icons/Feather';
 import Home from 'react-native-vector-icons/AntDesign';
 import { Briefcase, ChatCircleDots, House, User } from "phosphor-react-native";
 import { Colors, moderateScale } from "../theme";
-import { Subscription } from "../modules";
+import { ProfileScreen, Subscription } from "../modules";
+import ProfileContainer from "./ProfileStack";
 
 const BottomTab = AnimatedTabBarNavigator();
 
@@ -55,7 +56,7 @@ const TabRoutes = () => {
             />
             <BottomTab.Screen
                 name={NavigationRoutes.profile}
-                component={() => <Text>Profile</Text>}
+                component={ProfileContainer}
                 options={{
                     headerShown: false,
                     tabBarIcon: () => (

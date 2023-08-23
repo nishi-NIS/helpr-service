@@ -10,12 +10,12 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container} >
       {/* <AuthTopTabs /> */}
-      {/* <AppContainer /> */}
+      <AppContainer />
       {/* <LoginScreen /> */}
       {/* <SignupScreen2 /> */}
       {/* <SignupScreen /> */}
       {/* <OTPVerificationScreen /> */}
-      <DrawerRoutes />
+      {/* <DrawerRoutes /> */}
     </SafeAreaView>
   );
 };
