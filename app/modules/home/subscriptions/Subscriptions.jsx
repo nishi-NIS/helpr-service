@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, Dimensions, View, TextInput, ScrollView, Pressable } from "react-native";
 import Carousel from 'react-native-reanimated-carousel';
-import { Strings } from "../../constants";
+import { Strings } from "../../../constants";
 import { styles } from "./SubscriptionsStyles";
 import { CaretLeft, CaretRight } from "phosphor-react-native";
-import { Colors, horizontalScale, moderateScale, verticalScale } from "../../theme";
-import { CarouselCard } from "./components";
+import { Colors, horizontalScale, moderateScale, verticalScale } from "../../../theme";
+import { CarouselCard } from "../components";
 
 const Subscription = () => {
   const width = Dimensions.get('window').width;

@@ -16,4 +16,5 @@ export default {
     profileStack: 'ProfileStack',
     profileScreen: 'ProfileScreen',
     editDetailsScreen: 'EditDetailsScreen',
+    viewRatingsScreen: 'ViewRatingsScreen',
 };

@@ -83,30 +83,6 @@ export const styles = StyleSheet.create({
         marginTop: verticalScale(10),
         color: Colors.black
     },
-    // textInputView: {
-    //     borderWidth: moderateScale(1),
-    //     borderColor: Colors.theme,
-    //     width: horizontalScale(325),
-    //     alignSelf: "center",
-    //     height: verticalScale(50),
-    //     marginVertical: verticalScale(10),
-    //     borderRadius: moderateScale(8),
-    //     backgroundColor: Colors.offWhite,
-    // },
-    // textInput: {
-    //     fontSize: moderateScale(16),
-    //     color: Colors.black,
-    //     fontWeight: '400',
-    //     flex: 1
-    // },
-    // errorView: {
-    //     marginHorizontal: horizontalScale(6),
-    //     marginVertical: moderateScale(2)
-    // },
-    // errorText: {
-    //     color: Colors.red,
-    //     fontSize: moderateScale(12),
-    // },
     outerTextInputView: {
         marginBottom: verticalScale(12),
     },
@@ -137,10 +113,11 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: horizontalScale(120),
-        marginTop: verticalScale(15),
+        marginTop: verticalScale(8),
         padding: moderateScale(15),
         marginBottom: verticalScale(15),
         borderRadius: moderateScale(10),
+
     },
     buttonText: {
         color: Colors.white,
@@ -168,81 +145,94 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: Colors.offWhite,
     },
-    inputUploadImg: {
-        height: verticalScale(20),
-        width: horizontalScale(20)
-    },
     inputUploadText: {
         textAlign: "center",
         marginTop: verticalScale(10),
         color: Colors.black
     },
-    // dropdown: {
-    //     height: 40,
-    //     margin: 5,
-    //     marginLeft: 12,
-    //     marginRight: 12,
-    //     padding: 10,
-    //     borderRadius: 5,
-    //     borderColor: '#7F29D6',
-    //     borderWidth: 1,
-    //     backgroundColor: '#FBF7FB',
-    //   },
-    //   label: {
-    //     position: 'absolute',
-    //     backgroundColor: 'white',
-    //     left: 22,
-    //     top: 8,
-    //     zIndex: 999,
-    //     paddingHorizontal: 8,
-    //     fontSize: 14,
-    //   },
-    // placeholderStyle: {
-    //     fontSize: 16,
-    //   },
-    //   selectedTextStyle: {
-    //     fontSize: 16,
-    //   },
-    //   iconStyle: {
-    //     width: 20,
-    //     height: 20,
-    //   },
-    //   inputSearchStyle: {
-    //     height: 40,
-    //     fontSize: 16,
-    //   },
     dropdown: {
         height: 50,
-        borderColor: 'gray',
-        borderWidth: 0.5,
+        borderColor: Colors.theme,
+        borderWidth: moderateScale(1),
         borderRadius: 8,
-        paddingHorizontal: 8,
-      },
-      icon: {
-        marginRight: 5,
-      },
-      label: {
-        position: 'absolute',
-        backgroundColor: 'white',
-        left: 22,
-        top: 8,
-        zIndex: 999,
-        paddingHorizontal: 8,
-        fontSize: 14,
-      },
-      placeholderStyle: {
-        fontSize: 16,
-      },
-      selectedTextStyle: {
-        fontSize: 16,
-      },
-      iconStyle: {
-        width: 20,
-        height: 20,
-      },
-      inputSearchStyle: {
-        height: 40,
-        fontSize: 16,
-      },
+        // paddingHorizontal: 8,
+        marginHorizontal: horizontalScale(10),
+    },
+    dropdownContainer: {
+        flex: 1,
+        // justifyContent: "center",
+        // alignItems: "center",
+        borderWidth: moderateScale(1),
+        borderColor: Colors.theme,
+        marginHorizontal: horizontalScale(10),
+        borderRadius: moderateScale(5),
+        // borderTopLeftRadius: verticalScale(5),
+        // borderTopRightRadius: verticalScale(5),
+        backgroundColor: Colors.offWhite
+    },
+    dropdownInnerView: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginHorizontal: horizontalScale(10),
+    },
+    dropdownText: {
+        color: Colors.gray,
+        paddingVertical: verticalScale(10),
+        fontWeight: '500'
+    },
+    dropdownTextSelected: {
+        color: Colors.black,
+        paddingVertical: verticalScale(10),
+        fontWeight: '500'
+    },
+    option: {
+        paddingTop: verticalScale(3),
+        paddingHorizontal: horizontalScale(10),
+        // borderBottomWidth: moderateScale(1),
+        // borderColor: Colors.gray
+        // top: verticalScale(500),
+    },
+    modalOuterView: {
+        alignItems: "center",
+        top: verticalScale(633),
+        // flex: 1
+    },
+    modalView: {
+        width: horizontalScale(355),
+        borderWidth: moderateScale(1),
+        borderColor: Colors.theme,
+        borderBottomLeftRadius: verticalScale(5),
+        borderBottomRightRadius: verticalScale(5),
+        backgroundColor: Colors.offWhite
+    },
+    checkboxContainer: {
+        flexDirection: 'row',
+    },
+    checkbox: {
+        marginTop: verticalScale(0),
+        marginLeft: horizontalScale(5),
+        borderColor: Colors.theme,
+        borderRadius: moderateScale(5),
+        transform: [{ scaleX: horizontalScale(0.8) }, { scaleY: verticalScale(0.8) }],
+    },
+    contractView: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    label: {
+        marginVertical: verticalScale(6),
+        color: Colors.gray,
+    },
+    contractText: {
+        color: Colors.theme,
+        textDecorationLine: "underline"
+    },
+    confirmContract: {
+        color: Colors.gray,
+        marginLeft: horizontalScale(15),
+        top: verticalScale(-8)
+    },
 });
 

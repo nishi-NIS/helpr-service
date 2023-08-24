@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { NavigationRoutes } from "../constants";
-import { EditDetailsScreen, ProfileScreen } from "../modules";
+import { EditDetailsScreen, ProfileScreen, ViewRatings } from "../modules";
 
 const ProfileStack = createStackNavigator();
 
@@ -18,6 +18,13 @@ const ProfileContainer = () => {
                 <ProfileStack.Screen
                 name={NavigationRoutes.editDetailsScreen}
                 component={EditDetailsScreen}
+                options={{
+                    headerShown: false
+                }}
+                />
+                <ProfileStack.Screen
+                name={NavigationRoutes.viewRatingsScreen}
+                component={ViewRatings}
                 options={{
                     headerShown: false
                 }}

@@ -1,2 +1,3 @@
-export { default as Subscription } from './Subscriptions';
+export { ViewRatings } from '../profile/viewRatings';
 export { CarouselCard } from './components';
+export { Subscription } from './subscriptions';

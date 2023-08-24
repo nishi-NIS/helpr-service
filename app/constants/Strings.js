@@ -78,4 +78,13 @@ export default {
     editProfile: 'Edit Profile',
     updateProfile: 'Update Profile',
     addServices: '+ Add More Services',
+    selectServices: 'Select your expertise or the services',
+    electronicSignature: 'Enter your name for Electronic Signature',
+    iAgree: 'I agree with ',
+    contractText: 'contract waiver',
+    confirmContract: 'Confirm contract has been read and accepted',
+    viewRatings: 'View Ratings',
+    review: '- 150 Review',
+    allRatings: 'All Ratings',
+    allReview: 'All Reviews',
 };

@@ -42,12 +42,17 @@ const ProfileScreen = () => {
     return (
         <ScrollView style={styles.main} >
             <View style={styles.headerView} >
-                <CaretLeft size={moderateScale(20)} weight="bold" color={Colors.black} style={styles.caretLeft} />
+                <CaretLeft
+                    size={moderateScale(20)}
+                    weight="bold"
+                    color={Colors.black}
+                    style={styles.caretLeft}
+                />
                 <Text style={styles.subscriptionText} >{Strings.profile}</Text>
                 <Text></Text>
             </View>
             <View style={styles.imgOuterView} >
-                <View 
+                <View
                 // style={styles.imgInnerView} 
                 >
                     <Image
@@ -134,7 +139,10 @@ const ProfileScreen = () => {
                     </Pressable>
                 </View>
                 <Text style={styles.ratingNumber} >{`(${starRating})`}</Text>
-                <Text style={styles.ratingText} >{Strings.ratings}</Text>
+                <Text
+                    style={styles.ratingText}
+                    onPress={() => navigation.navigate(NavigationRoutes.viewRatingsScreen)}
+                >{Strings.ratings}</Text>
             </View>
             <View style={styles.textCardOuterView} >
                 <View style={styles.textCardView} >
