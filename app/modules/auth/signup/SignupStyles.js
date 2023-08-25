@@ -74,14 +74,11 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: Colors.offWhite,
     },
-    uploadImg: {
-        height: verticalScale(20),
-        width: horizontalScale(20)
-    },
     uploadText: {
         textAlign: "center",
         marginTop: verticalScale(10),
-        color: Colors.black
+        color: Colors.gray,
+        fontWeight: '400'
     },
     outerTextInputView: {
         marginBottom: verticalScale(12),

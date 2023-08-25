@@ -17,6 +17,9 @@ export const LoginValidationSchema = Yup.object().shape({
 });
 
 export const SignupValidationSchema = Yup.object().shape({
+    // photo: Yup
+    // .required(Strings.photoRequired),
+
     firstname: Yup
     .string()
     .required(Strings.firstnameRequired)

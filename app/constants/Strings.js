@@ -23,6 +23,7 @@ export default {
     next: 'Next',
     haveAccount: 'Already have an account?',
     uploadPic: 'Upload Profile Picture',
+    photoRequired: 'Photo is required',
     firstnameRequired: 'First Name is required',
     lastnameRequired: 'Last Name is required',
     mobileRequired: 'Mobile Number is required',

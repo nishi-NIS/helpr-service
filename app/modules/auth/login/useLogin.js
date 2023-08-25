@@ -6,9 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 export const useLogin = () => {
     const navigation = useNavigation();
     const [isSelected, setIsSelected] = React.useState(false);
+    const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+    const focused = true;
 
     const navigateToSignup = () => navigation.navigate(NavigationRoutes.signup);
-    const navigateToForgotPassword = () => navigation.navigate(NavigationRoutes.forgotScreen)
+    const navigateToForgotPassword = () => navigation.navigate(NavigationRoutes.forgotScreen);
+
+    const toggleSecureText = () => {
+        setSecureTextEntry((prevState) => !prevState)
+    };
 
     const initialValues = {
         email: '',
@@ -16,7 +22,6 @@ export const useLogin = () => {
     };
 
     const onSubmit = () => {
-        // console.log("Pressed");
         navigation.replace(NavigationRoutes.drawerRoutes);
     };
 
@@ -32,6 +37,10 @@ export const useLogin = () => {
         isSelected,
         setIsSelected,
         navigateToSignup,
-        navigateToForgotPassword
+        navigateToForgotPassword,
+        secureTextEntry,
+        setSecureTextEntry,
+        focused,
+        toggleSecureText
     };
 };

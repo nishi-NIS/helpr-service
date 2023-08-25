@@ -103,6 +103,51 @@ export const styles = StyleSheet.create({
         color: Colors.black,
         fontWeight: '700',
         fontSize: moderateScale(20),
-        marginTop: verticalScale(10)
+        marginTop: verticalScale(10),
+        marginBottom: verticalScale(10)
+    },
+    flatListView: {
+        marginBottom: verticalScale(10)
+    },
+    imageStyle: {
+        height: moderateScale(50),
+        width: moderateScale(50),
+        borderRadius: moderateScale(100)
+    },
+    headerText: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    firstName: {
+        color: Colors.black,
+        fontWeight: '700',
+        fontSize: moderateScale(16)
+    },
+    dateText: {
+        color: Colors.gray,
+        fontWeight: '400',
+        fontSize: moderateScale(10)
+    },
+    nameTextView: {
+        // marginHorizontal: horizontalScale(10),
+        justifyContent: "center",
+        right: horizontalScale(60)
+    },
+    ratingsView: {
+        flexDirection: "row",
+        // justifyContent: "center",
+        alignItems: "center",
+        // marginRight: horizontalScale(10)
+    },
+    digit: {
+        color: Colors.black,
+        fontWeight: '500',
+        fontSize: moderateScale(10)
+    },
+    titleText: {
+        color: Colors.black,
+        marginTop: verticalScale(8),
+        fontWeight: '500',
+        fontSize: moderateScale(10)
     },
 });

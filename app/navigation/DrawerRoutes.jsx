@@ -9,7 +9,7 @@ const Drawer = createDrawerNavigator();
 
 const DrawerRoutes = () => {
     return (
-        <NavigationContainer>
+        // <NavigationContainer>
             <Drawer.Navigator
                 drawerContent={(props) => <CustomDrawer {...props}
                     screenOptions={{ drawerType: "front", headerShown: false }}
@@ -26,7 +26,7 @@ const DrawerRoutes = () => {
                     }}
                 />
             </Drawer.Navigator>
-        </NavigationContainer>
+        // </NavigationContainer>
     );
 };
 

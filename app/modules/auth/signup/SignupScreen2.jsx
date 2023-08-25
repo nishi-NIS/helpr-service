@@ -9,20 +9,34 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { CaretDown, FilePlus } from "phosphor-react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import CheckBox from "@react-native-community/checkbox";
+import useSign2 from "./useSign2";
 
 const SignupScreen2 = () => {
     const navigation = useNavigation();
-    const serviceOptions = [];
-    const [selectedValue, setSelectedValue] = React.useState('');
-    const [showDropdown, setShowDropdown] = React.useState(false);
-    const [isSelected, setIsSelected] = React.useState(false);
+    // const serviceOptions = [];
+    // const [selectedValue, setSelectedValue] = React.useState('');
+    // const [showDropdown, setShowDropdown] = React.useState(false);
+    // const [isSelected, setIsSelected] = React.useState(false);
 
-    const options = ['Plumbing', 'Cleaning', 'Dusting',];
+    // const options = ['Plumbing', 'Cleaning', 'Dusting',];
 
-    const handleOptionSelect = (option) => {
-        setSelectedValue(option);
-        setShowDropdown(false);
-    };
+    // const handleOptionSelect = (option) => {
+    //     setSelectedValue(option);
+    //     setShowDropdown(false);
+    // };
+
+    const {
+        selectedValue, 
+        setSelectedValue,
+        showDropdown, 
+        setShowDropdown,
+        isSelected, 
+        setIsSelected,
+        options,
+        handleOptionSelect,
+        navigateBack,
+        navigateToOtpScreen
+    } = useSign2();
 
     return (
         <ScrollView style={styles.main} >
@@ -42,7 +56,7 @@ const SignupScreen2 = () => {
                 <Text style={styles.subWelcomeText} >{Strings.welcomeText}</Text>
             </View>
             <View style={styles.tabTextView} >
-                <Pressable onPress={() => navigation.goBack()} >
+                <Pressable onPress={navigateBack} >
                     <Text style={styles.tabText} >{Strings.signup2}</Text>
                 </Pressable>
             </View>
@@ -88,7 +102,7 @@ const SignupScreen2 = () => {
                 </Pressable>
                 <Modal
                     visible={showDropdown}
-                    animationType="slide"
+                    animationType="none"
                     transparent={true}
                     propagateSwipe={true}
                 >
@@ -177,7 +191,7 @@ const SignupScreen2 = () => {
                 </View>
             </View>
             <Text style={styles.confirmContract} >{Strings.confirmContract}</Text>
-            <Pressable onPress={() => navigation.navigate(NavigationRoutes.otpScreen)} >
+            <Pressable onPress={navigateToOtpScreen} >
                 <View style={styles.button} >
                     <Text style={styles.buttonText}>{Strings.signUp}</Text>
                 </View>

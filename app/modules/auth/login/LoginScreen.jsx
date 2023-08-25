@@ -10,15 +10,9 @@ import { Strings } from "../../../constants";
 import { Eye, EyeClosed, EyeSlash, Heart } from 'phosphor-react-native';
 
 const LoginScreen = () => {
-    const { formik, isSelected, setIsSelected, navigateToSignup, navigateToForgotPassword } = useLogin();
+    const { formik, isSelected, secureTextEntry, focused, toggleSecureText, setSecureTextEntry, setIsSelected, navigateToSignup, navigateToForgotPassword } = useLogin();
     const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik;
-    const focused = true;
-    const [secureTextEntry, setSecureTextEntry] = useState(true);
-
-    const toggleSecureText = () => {
-        setSecureTextEntry((prevState) => !prevState)
-    };
-
+   
     return (
         <ScrollView style={styles.main} >
             <StatusBar
