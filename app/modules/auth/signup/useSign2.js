@@ -14,8 +14,8 @@ export default useSignup = () => {
     const navigateBack = () => navigation.goBack();
     const navigateToOtpScreen = () => navigation.navigate(NavigationRoutes.otpScreen);
 
-    const handleOptionSelect = (option) => {
-        setSelectedValue(option);
+    const handleOptionSelect = (item) => {
+        setSelectedValue(item);
         setShowDropdown(false);
     };
 

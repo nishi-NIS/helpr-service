@@ -17,16 +17,17 @@ export const LoginValidationSchema = Yup.object().shape({
 });
 
 export const SignupValidationSchema = Yup.object().shape({
-    // photo: Yup
-    // .required(Strings.photoRequired),
+    profilePic: Yup
+    .string()
+    .required(Strings.photoRequired),
 
-    firstname: Yup
+    firstName: Yup
     .string()
     .required(Strings.firstnameRequired)
     .min(3, Strings.minName)
     .max(10, Strings.maxName),
 
-    lastname: Yup
+    lastName: Yup
     .string()
     .required(Strings.lastnameRequired)
     .min(3, Strings.minName)
@@ -37,7 +38,7 @@ export const SignupValidationSchema = Yup.object().shape({
     .matches(Regex.email, Strings.invalidEmail)
     .required(Strings.emailRequired),
     
-    mobileNumber: Yup
+    phone: Yup
     .string()
     .matches(Regex.phoneNumber, Strings.invalidNumber)
     .required(Strings.mobileRequired),
@@ -53,4 +54,26 @@ export const SignupValidationSchema = Yup.object().shape({
     .string()
     .required(Strings.confirmPasswordRequired)
     .oneOf([Yup.ref('password')], Strings.noMatchPassword)
+});
+
+export const SignupValidationSchema2 = Yup.object().shape({
+    businessLicense: Yup
+    .string()
+    .required(Strings.businessLicenseRequired),
+
+    passportOrLicense: Yup
+    .string()
+    .required(Strings.passportOrLicenseRequired),
+
+    services: Yup
+    .string()
+    .required(Strings.servicesRequired),
+
+    signature: Yup
+    .string()
+    .required(Strings.signatureRequired),
+
+    acceptTerms: Yup
+    .string()
+    .required(Strings.acceptTermsRequired)
 });

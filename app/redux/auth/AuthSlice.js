@@ -3,7 +3,7 @@ import { Slice } from "../../constants";
 import { SignUpUser } from "./AuthService";
 
 const initialState = {
-    newUser: undefined,
+    newUser: [],
     loading: false,
     errorMessage: null,
     // authList: {},
@@ -14,17 +14,19 @@ const authSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
+        builder.addCase(SignUpUser.pending, (state, action) => {
+            state.loading = true;
+            state.errorMessage = null;
+        }),
         builder.addCase(SignUpUser.fulfilled, (state, action) => {
-            state.SignUpUser = action.payload;
+            state.newUser = action.payload;
             state.loading = false;
         });
         builder.addCase(SignUpUser.rejected, (state, action) => {
-            state.loading = true;
+            state.loading = false;
             state.errorMessage = action.payload;
         });
-        builder.addCase(SignUpUser.pending, (state, action) => {
-            state.loading = true;
-        })
+       
     }
 });
 

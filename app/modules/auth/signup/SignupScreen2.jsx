@@ -1,15 +1,17 @@
-import React from "react";
-import { ScrollView, StatusBar, Text, View, Image, Pressable, Modal, TextInput, Linking } from "react-native";
+import React, { useEffect } from "react";
+import { ScrollView, StatusBar, Text, View, Image, Pressable, Modal, TextInput, FlatList, Linking, TouchableOpacity } from "react-native";
 import { Colors, horizontalScale, moderateScale, verticalScale } from "../../../theme";
 import { styles } from "./SignupStyles";
 import Images from "../../../assests";
-import { NavigationRoutes, Strings } from "../../../constants";
+import { EndPoints, NavigationRoutes, Strings } from "../../../constants";
 import { useNavigation } from '@react-navigation/native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { CaretDown, FilePlus } from "phosphor-react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import CheckBox from "@react-native-community/checkbox";
 import useSign2 from "./useSign2";
+import useSignup from "./useSignup";
+import { APIConfig } from "../../../config/APIConfig";
 
 const SignupScreen2 = () => {
     const navigation = useNavigation();
@@ -25,18 +27,33 @@ const SignupScreen2 = () => {
     //     setShowDropdown(false);
     // };
 
+    const [serviceList, setServiceList] = React.useState('');
+
+    useEffect(() => {
+        APIConfig.get(EndPoints.services)
+            .then((response) => {
+                console.log("---services", response?.data?.services);
+                setServiceList(response?.data?.services)
+            })
+            .catch((error) => {
+                console.log("service error----", error)
+            })
+    }, [])
+
     const {
-        selectedValue, 
+        selectedValue,
         setSelectedValue,
-        showDropdown, 
+        showDropdown,
         setShowDropdown,
-        isSelected, 
+        isSelected,
         setIsSelected,
         options,
         handleOptionSelect,
         navigateBack,
         navigateToOtpScreen
     } = useSign2();
+    const { formik2 } = useSignup();
+    const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik2;
 
     return (
         <ScrollView style={styles.main} >
@@ -114,20 +131,38 @@ const SignupScreen2 = () => {
                         <View
                             style={styles.modalView}
                         >
-                            {options.map((option) => (
+                            {/* {serviceList.map((option) => (
                                 <Pressable
                                     key={option}
                                     style={styles.option}
                                     onPress={() => handleOptionSelect(option)}>
-                                    <Text style={{ color: Colors.black }} >{option}</Text>
+                                    <Text style={{ color: Colors.black }} >{option._id}</Text>
                                 </Pressable>
-                            ))}
+                            ))} */}
+                            <FlatList
+                            data={serviceList}
+                            renderItem={({item}) => {
+                                return(
+                                    <Pressable
+                                    // key={item}
+                                    style={styles.option}
+                                     onPress={() => {
+                                        console.log("item", item.name)
+                                        setServiceList(item)
+                                        setShowDropdown(false);
+                                        }} >
+                                    <Text style={{ color: Colors.black }}>{item.name}</Text>
+                                    </Pressable>
+                                )
+                            }}
+                            />
                             <Pressable onPress={() => setShowDropdown(false)}>
                                 <Text style={{ color: Colors.black, }} >Close</Text>
                             </Pressable>
                         </View>
                     </View>
                     {/* </ScrollView> */}
+                    {/* 9824698725 */}
                 </Modal>
             </View>
             <View style={{ marginTop: verticalScale(12), }} >
@@ -143,6 +178,12 @@ const SignupScreen2 = () => {
                     <TextInput
                         placeholder={Strings.electronicSignature}
                         placeholderTextColor={Colors.gray}
+                        secureTextEntry={false}
+                        keyboardType="default"
+                        name="signature"
+                        handleChange={handleChange}
+                        handleBlur={handleBlur}
+                        formik={formik2}
                         style={{
                             color: Colors.black,
                             fontWeight: '500',
@@ -191,11 +232,14 @@ const SignupScreen2 = () => {
                 </View>
             </View>
             <Text style={styles.confirmContract} >{Strings.confirmContract}</Text>
-            <Pressable onPress={navigateToOtpScreen} >
+            <TouchableOpacity onPress={() =>
+                // navigateToOtpScreen
+                handleSubmit
+            } >
                 <View style={styles.button} >
                     <Text style={styles.buttonText}>{Strings.signUp}</Text>
                 </View>
-            </Pressable>
+            </TouchableOpacity>
         </ScrollView>
     );
 };

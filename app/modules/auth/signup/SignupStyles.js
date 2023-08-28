@@ -105,6 +105,15 @@ export const styles = StyleSheet.create({
         color: Colors.red,
         fontSize: moderateScale(10),
     },
+    photoError: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    photoErrorText: {
+        color: Colors.red,
+        fontSize: moderateScale(10),
+        top: verticalScale(-7)
+    },
     button: {
         backgroundColor: Colors.theme,
         justifyContent: 'center',

@@ -153,8 +153,55 @@ export const styles = StyleSheet.create({
     btnText: {
         color: Colors.white,
         fontSize: moderateScale(16),
-        fontWeight: '600',
+        fontWeight: '500',
         textAlign: "center",
+        padding: moderateScale(4),
+    },
+    backgroundModalView: {
+        flex: 1,
+        backgroundColor: Colors.lightBlack,
+        opacity: 0.8,
+    },
+    modalOuterView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
+    modalInnerView: {
+        width: horizontalScale(300),
+        backgroundColor: 'white',
+        borderRadius: moderateScale(10),
         padding: moderateScale(10),
+        shadowColor: Colors.black,
+        shadowOffset: {
+            width: horizontalScale(2),
+            height: verticalScale(2),
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: moderateScale(4),
+        elevation: moderateScale(5),
+    },
+    changePasswordText: {
+        paddingBottom: verticalScale(10),
+        color: Colors.theme,
+        fontSize: moderateScale(20),
+        fontWeight: '700',
+        alignSelf: "center",
+    },
+    modalTextInput: {
+        backgroundColor: Colors.offWhite,
+        borderColor: Colors.theme,
+        borderWidth: moderateScale(1),
+        borderRadius: moderateScale(5),
+        fontWeight: '500',
+        paddingLeft: horizontalScale(10),
+        color: Colors.black,
+        marginBottom: verticalScale(10),
+        height: verticalScale(40),
+    },
+    updatePasswordBtnView: {
+        backgroundColor: Colors.theme,
+        borderRadius: moderateScale(5)
     },
 });

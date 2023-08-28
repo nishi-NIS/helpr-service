@@ -12,6 +12,7 @@ const ProfileScreen = () => {
     const animatedButtonScale = new Animated.Value(1);
     const [isEnabled, setIsEnabled] = React.useState(false);
     const [showModal, setShowModal] = React.useState(false);
+    const [showbackgroundModal, setShowBackgroundModal] = React.useState(false);
     const navigation = useNavigation();
 
     const toggleSwitch = () => {
@@ -225,11 +226,14 @@ const ProfileScreen = () => {
                         style={styles.icon}
                     />
                     <Text style={styles.singleText} >{Strings.cancelation}</Text>
-                    <Text style={styles.reviewText} >{Strings.review}</Text>
+                    <Text style={styles.reviewText} >{Strings.reviews}</Text>
                 </View>
                 <Pressable
                     // style={{ borderWidth: 1 }}
-                    onPress={() => setShowModal(true)}
+                    onPress={() => {
+                        setShowModal(true);
+                        setShowBackgroundModal(true);
+                    }}
                 >
                     <View style={styles.textCardView} >
                         <LockKeyOpen
@@ -241,130 +245,53 @@ const ProfileScreen = () => {
                         <Text style={styles.singleText} >{Strings.changePassword}</Text>
                     </View>
                 </Pressable>
-                {/* <Modal
-                    visible={showModal}
-                    animationType="none"
+                <Modal
                     transparent={true}
-                    propagateSwipe={true}
+                    visible={showbackgroundModal}
                 >
-                    <View style={{
-                        backgroundColor: Colors.white,
-                    }} >
-                        <X
-                            size={moderateScale(20)}
-                            color={Colors.gray}
-                            weight="bold"
-                            style={{
-                                alignSelf: "flex-end"
-                            }}
-                        />
-                        <Text style={{
-                            color: Colors.theme,
-                            fontSize: moderateScale(20),
-                            fontWeight: '600',
-                            alignSelf: "center"
-                        }} >{Strings.changePassword}</Text>
-                        <TextInput
-                            style={{ borderWidth: moderateScale(1) }}
-                        />
+                    <View style={styles.backgroundModalView}>
                     </View>
-                    <Text style={{ color: Colors.black }}
-                        onPress={() => setShowModal(false)}
-                    >Modal</Text>
-                </Modal> */}
+                </Modal>
                 <Modal
                     transparent={true}
                     visible={showModal}
-                    onRequestClose={() => { }}>
-                    <View style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'center',
-                    }}>
-                        <View style={{
-                            width: 300,
-                            backgroundColor: 'white',
-                            borderRadius: 10,
-                            padding: 10,
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 0,
-                                height: 2,
-                            },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 4,
-                            elevation: 5,
-                        }}>
-                            <Text
-                                style={{
-                                    padding: 10,
-                                    color: Colors.theme,
-                                    fontSize: 20,
-                                    fontWeight: '700',
-                                    alignSelf: "center"
-                                }}>
-                                Change Password
+                // onRequestClose={() => { }}
+                >
+                    <View style={styles.modalOuterView}>
+                        <View style={styles.modalInnerView}>
+                            <Text style={styles.changePasswordText} >
+                                {Strings.changePassword}
                             </Text>
-                            <TouchableOpacity
-                                style={{
-                                    padding: 10,
-                                    backgroundColor: '#FBF7FB',
-                                    borderColor: Colors.theme,
-                                    borderWidth: 1,
-                                    borderRadius: 5
-                                }} >
-                                <Text style={{ color: Colors.black }} >Current Password</Text>
-                            </TouchableOpacity>
+                            <Pressable>
+                                <TextInput
+                                    placeholder={Strings.currentPassword}
+                                    placeholderTextColor={Colors.gray}
+                                    style={styles.modalTextInput}
+                                />
+                            </Pressable>
 
-                            <TouchableOpacity
-                                style={{
-                                    padding: 10,
-                                    backgroundColor: '#FBF7FB',
-                                    marginTop: 10,
-                                    borderColor: Colors.theme,
-                                    borderWidth: 1,
-                                    borderRadius: 5
-                                }} >
-                                <Text style={{ color: Colors.black }} >New Password</Text>
-                            </TouchableOpacity>
+                            <Pressable>
+                                <TextInput
+                                    placeholder={Strings.newPassword}
+                                    placeholderTextColor={Colors.gray}
+                                    style={styles.modalTextInput}
+                                />
+                            </Pressable>
 
-                            <TouchableOpacity
-                                style={{
-                                    padding: 10,
-                                    backgroundColor: '#FBF7FB',
-                                    marginTop: 10,
-                                    borderColor: Colors.theme,
-                                    borderWidth: 1,
-                                    borderRadius: 5
+                            <Pressable>
+                                <TextInput
+                                    placeholder={Strings.confirmNewPassword}
+                                    placeholderTextColor={Colors.gray}
+                                    style={styles.modalTextInput}
+                                />
+                            </Pressable>
+                            <View style={styles.updatePasswordBtnView}>
+                                <Pressable onPress={() => {
+                                    setShowModal(false);
+                                    setShowBackgroundModal(false);
                                 }} >
-                                <Text style={{ color: Colors.black }} >Confirm New Password</Text>
-                            </TouchableOpacity>
-                            <View
-                                style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                {/* <TouchableOpacity
-                                    style={{
-                                        padding: 10,
-                                        backgroundColor: '#FFFFFF',
-                                        marginTop: 10,
-                                    }}
-                                    onPress={() => setShowModal(false)}> */}
-                                <Pressable onPress={() => setShowModal(false)} >
-                                    <View style={{
-                                        backgroundColor: Colors.theme,
-                                        borderRadius: moderateScale(6),
-                                        marginBottom: verticalScale(20),
-                                        marginTop: verticalScale(50),
-                                        shadowColor: Colors.black,
-                                        shadowOffset: { height: verticalScale(2), width: horizontalScale(1) },
-                                        shadowOpacity: 0.25,
-                                        shadowRadius: moderateScale(3),
-                                        elevation: moderateScale(1),
-                                    }} >
-                                        <Text style={styles.btnText} >Update Password</Text>
-                                    </View>
+                                    <Text style={styles.btnText} >{Strings.updatePassword}</Text>
                                 </Pressable>
-                                {/* </TouchableOpacity> */}
                             </View>
                         </View>
                     </View>

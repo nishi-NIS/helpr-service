@@ -12,7 +12,16 @@ import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import ImagePicker from 'react-native-image-picker';
 
 const SignupScreen = () => {
-    const { formik, navigateToSignIn, navigateGoBack, navigateToSignup2, focused, ErrorMessage, setErrorMessage } = useSignup();
+    const {
+        formik,
+        navigateToSignIn,
+        navigateGoBack,
+        navigateToSignup2,
+        focused,
+        ErrorMessage,
+        setErrorMessage,
+        requestCameraPermission
+    } = useSignup();
     const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik;
 
     const [selectedImage, setSelectedImage] = React.useState(null);
@@ -34,11 +43,11 @@ const SignupScreen = () => {
 
     const openCameraFunc = async () => {
         const response = await launchCamera({
-                    mediaType: 'photo',
-                    maxHeight: 200,
-                    height: 200,
-                    includeExtra: true,
-                })
+            mediaType: 'photo',
+            maxHeight: 200,
+            height: 200,
+            includeExtra: true,
+        })
         console.log("Response", response)
         // setSelectedImage([...selectedImage, ...response.assets])
     };
@@ -89,6 +98,13 @@ const SignupScreen = () => {
                             {Strings.uploadPic}
                         </Text>
                     </View>
+                    <View style={styles.photoError} >
+                        {touched.profilePic && errors.profilePic && (
+                            <Text style={styles.photoErrorText}>
+                                {errors.profilePic}
+                            </Text>
+                        )}
+                    </View>
                 </Pressable>
                 <Modal
                     transparent={true}
@@ -125,22 +141,23 @@ const SignupScreen = () => {
                             </Text>
                             <TouchableOpacity
                                 style={{ padding: 10, backgroundColor: '#FBF7FB' }}
-                                // onPress={async () => {
-                                //     const pickerResult = await ImagePicker.launchCamera({
-                                //         mediaType: 'photo',
-                                //         maxHeight: 200,
-                                //         height: 200,
-                                //         includeExtra: true,
-                                //     });
-                                //     console.log(pickerResult);
-                                //     if (pickerResult?.assets) {
-                                //         setSelectedImage({ profilePic: pickerResult?.assets[0] });
-                                //     }
-                                //     setSelectedImage({ isProfile: false });
-                                // }}
-                                // onPress={openCameraFunc}
-                                >
-                                <Text style={{color: Colors.black}} >Open Camera</Text>
+                            // onPress={async () => {
+                            //     const pickerResult = await ImagePicker.launchCamera({
+                            //         mediaType: 'photo',
+                            //         maxHeight: 200,
+                            //         height: 200,
+                            //         includeExtra: true,
+                            //     });
+                            //     console.log(pickerResult);
+                            //     if (pickerResult?.assets) {
+                            //         setSelectedImage({ profilePic: pickerResult?.assets[0] });
+                            //     }
+                            //     setSelectedImage({ isProfile: false });
+                            // }}
+                            // onPress={openCameraFunc}
+                            // onPress={requestCameraPermission}
+                            >
+                                <Text style={{ color: Colors.black }} >Open Camera</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity
@@ -162,7 +179,7 @@ const SignupScreen = () => {
                                     }
                                     setSelectedImage({ isProfile: false });
                                 }}>
-                                <Text style={{color: Colors.black}} >Open Gallery</Text>
+                                <Text style={{ color: Colors.black }} >Open Gallery</Text>
                             </TouchableOpacity>
                             <View
                                 style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
@@ -186,16 +203,17 @@ const SignupScreen = () => {
                         placeholder={Strings.firstname}
                         secureTextEntry={false}
                         keyboardType="default"
-                        name="firstname"
+                        name="firstName"
+                        editable={false}
                         handleChange={handleChange}
                         handleBlur={handleBlur}
                         formik={formik}
                         style={styles.textInput}
                     />
                     <View style={styles.errorView} >
-                        {touched.firstname && errors.firstname && (
+                        {touched.firstName && errors.firstName && (
                             <Text style={styles.errorText}>
-                                {errors.firstname}
+                                {errors.firstName}
                             </Text>
                         )}
                     </View>
@@ -207,16 +225,16 @@ const SignupScreen = () => {
                         placeholder={Strings.lastname}
                         secureTextEntry={false}
                         keyboardType="default"
-                        name="lastname"
+                        name="lastName"
                         handleChange={handleChange}
                         handleBlur={handleBlur}
                         formik={formik}
                         style={styles.textInput}
                     />
                     <View style={styles.errorView} >
-                        {touched.lastname && errors.lastname && (
+                        {touched.lastName && errors.lastName && (
                             <Text style={styles.errorText}>
-                                {errors.lastname}
+                                {errors.lastName}
                             </Text>
                         )}
                     </View>
@@ -248,17 +266,17 @@ const SignupScreen = () => {
                     <CustomTextInput
                         placeholder={Strings.mobileNumber}
                         secureTextEntry={false}
-                        keyboardType="default"
-                        name="mobileNumber"
+                        keyboardType="number-pad"
+                        name="phone"
                         handleChange={handleChange}
                         handleBlur={handleBlur}
                         formik={formik}
                         style={styles.textInput}
                     />
                     <View style={styles.errorView} >
-                        {touched.mobileNumber && errors.mobileNumber && (
+                        {touched.phone && errors.phone && (
                             <Text style={styles.errorText}>
-                                {errors.mobileNumber}
+                                {errors.phone}
                             </Text>
                         )}
                     </View>
@@ -308,8 +326,8 @@ const SignupScreen = () => {
             </View>
             <TouchableOpacity onPress={
 
-                navigateToSignup2
-                // handleSubmit
+                // navigateToSignup2
+                handleSubmit
                 // navigation.navigate(NavigationRoutes.signup2)
             } >
                 <View style={styles.button} >
