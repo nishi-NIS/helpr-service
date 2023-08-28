@@ -301,14 +301,23 @@
 // });
 
 import * as React from 'react';
-import { View, Text, ScrollView, StatusBar, Image, Pressable, Dimensions } from "react-native";
-import { Colors, verticalScale } from "../../../theme";
-import Images from "../../../assests";
-import { styles } from "./forgotPasswordOtpStyles";
-import { NavigationRoutes, Strings } from "../../../constants";
-import { useNavigation } from '@react-navigation/native';
-import { API_URL } from '../../../config';
+import {
+  View,
+  Text,
+  ScrollView,
+  StatusBar,
+  Image,
+  Pressable,
+  Dimensions,
+} from 'react-native';
+import {Colors, verticalScale} from '../../../theme';
+import Images from '../../../assests';
+import {styles} from './forgotPasswordOtpStyles';
+import {NavigationRoutes, Strings} from '../../../constants';
+import {useNavigation} from '@react-navigation/native';
+import {API_URL} from '../../../config';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ForgotPasswordOtpScreen = () => {
   const navigation = useNavigation();
@@ -347,7 +356,7 @@ const ForgotPasswordOtpScreen = () => {
     };
     setShowResendButton(false);
 
-    fetch(API_URL + 'api/user/resendOtp', requestOptions)
+    fetch(API_URL + 'resendOtp', requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);
@@ -374,12 +383,12 @@ const ForgotPasswordOtpScreen = () => {
       redirect: 'follow',
     };
 
-    fetch(API_URL + 'api/user/checkForgotOtp', requestOptions)
+    fetch(API_URL + 'checkForgotOtp', requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);
         if (result.message === 'OTP is correct. You can reset your password.') {
-          navigation.navigate('ResetPassword');
+          navigation.navigate(NavigationRoutes.resetPasswordScreen);
         } else {
           setErrorMessage(result.message);
         }
@@ -388,7 +397,7 @@ const ForgotPasswordOtpScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.main} >
+    <ScrollView style={styles.main}>
       <StatusBar
         animated={true}
         backgroundColor={Colors.statusBar}
@@ -396,24 +405,19 @@ const ForgotPasswordOtpScreen = () => {
         currentHeight={true}
         translucent={true}
       />
-      <Image
-        source={Images.loginBG}
-        style={styles.topImage}
-      />
+      <Image source={Images.loginBG} style={styles.topImage} />
       <View style={styles.container}>
         <Text style={styles.welcomeText}>{Strings.forgotPassword}</Text>
-        <Text style={styles.welcomeInfo}>
-          {Strings.otpHead}
-        </Text>
+        <Text style={styles.welcomeInfo}>{Strings.otpHead}</Text>
       </View>
       <View
         style={{
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
         }}>
-        <Text style={styles.otpText} >{Strings.otp}</Text>
+        <Text style={styles.otpText}>{Strings.otp}</Text>
         <OTPInputView
-          style={{ width: '80%', height: verticalScale(50) }}
+          style={{width: '80%', height: verticalScale(50)}}
           pinCount={4}
           autoFocusOnLoad={false}
           codeInputFieldStyle={styles.underlineStyleBase}
@@ -426,27 +430,17 @@ const ForgotPasswordOtpScreen = () => {
         {/* {showResendButton && ( */}
         <View style={styles.forgotPassword}>
           <Text
-            style={{ color: Colors.theme, textDecorationLine: 'underline' }}
-          // onPress={onResend}
-          >
+            style={{color: Colors.theme, textDecorationLine: 'underline'}}
+            onPress={onResend}>
             {Strings.resend}
           </Text>
         </View>
         {/* )} */}
       </View>
-      <Pressable style={styles.button}
-        onPress={
-          () => navigation.navigate(NavigationRoutes.resetPasswordScreen)
-          // formik.handleSubmit
-        }>
+      <Pressable style={styles.button} onPress={onOtpSubmit}>
         <Text style={styles.buttonText}>{Strings.verify}</Text>
       </Pressable>
-      {ErrorMessage && (
-        <Text
-          style={styles.error}>
-          {ErrorMessage}
-        </Text>
-      )}
+      {ErrorMessage && <Text style={styles.error}>{ErrorMessage}</Text>}
 
       <Text
         style={styles.createAccount}

@@ -1,4 +1,5 @@
 export default {
-    signUp: 'signup',
-    services: 'getServiceList',
+  signUp: 'signup',
+  services: 'getServiceList',
+  login: 'login',
 };

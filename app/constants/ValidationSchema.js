@@ -3,77 +3,56 @@ import Strings from './Strings';
 import Regex from './Regex';
 
 export const LoginValidationSchema = Yup.object().shape({
-    email: Yup
-    .string()
+  email: Yup.string()
     .matches(Regex.email, Strings.invalidEmail)
     .required(Strings.emailRequired),
 
-    password: Yup
-    .string()
-    .matches(Regex.password, Strings.invalidPassword)
+  password: Yup.string()
     .required(Strings.passwordRequired)
-    .min(8, Strings.minPassword)
-    .max(12, Strings.maxPassword)
+    .min(6, Strings.minPassword)
+    .max(12, Strings.maxPassword),
 });
 
 export const SignupValidationSchema = Yup.object().shape({
-    profilePic: Yup
-    .string()
-    .required(Strings.photoRequired),
+  profilePic: Yup.string().required(Strings.photoRequired),
 
-    firstName: Yup
-    .string()
+  firstName: Yup.string()
     .required(Strings.firstnameRequired)
     .min(3, Strings.minName)
     .max(10, Strings.maxName),
 
-    lastName: Yup
-    .string()
+  lastName: Yup.string()
     .required(Strings.lastnameRequired)
     .min(3, Strings.minName)
     .max(10, Strings.maxName),
-    
-    email: Yup
-    .string()
+
+  email: Yup.string()
     .matches(Regex.email, Strings.invalidEmail)
     .required(Strings.emailRequired),
-    
-    phone: Yup
-    .string()
+
+  phone: Yup.string()
     .matches(Regex.phoneNumber, Strings.invalidNumber)
     .required(Strings.mobileRequired),
-    
-    password: Yup
-    .string()
+
+  password: Yup.string()
     .matches(Regex.password, Strings.invalidPassword)
     .required(Strings.passwordRequired)
     .min(8, Strings.minPassword)
     .max(12, Strings.maxPassword),
-    
-    confirmPassword: Yup
-    .string()
+
+  confirmPassword: Yup.string()
     .required(Strings.confirmPasswordRequired)
-    .oneOf([Yup.ref('password')], Strings.noMatchPassword)
+    .oneOf([Yup.ref('password')], Strings.noMatchPassword),
 });
 
 export const SignupValidationSchema2 = Yup.object().shape({
-    businessLicense: Yup
-    .string()
-    .required(Strings.businessLicenseRequired),
+  businessLicense: Yup.string().required(Strings.businessLicenseRequired),
 
-    passportOrLicense: Yup
-    .string()
-    .required(Strings.passportOrLicenseRequired),
+  passportOrLicense: Yup.string().required(Strings.passportOrLicenseRequired),
 
-    services: Yup
-    .string()
-    .required(Strings.servicesRequired),
+  services: Yup.string().required(Strings.servicesRequired),
 
-    signature: Yup
-    .string()
-    .required(Strings.signatureRequired),
+  signature: Yup.string().required(Strings.signatureRequired),
 
-    acceptTerms: Yup
-    .string()
-    .required(Strings.acceptTermsRequired)
+  acceptTerms: Yup.string().required(Strings.acceptTermsRequired),
 });
