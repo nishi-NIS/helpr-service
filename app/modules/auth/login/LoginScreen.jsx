@@ -14,8 +14,9 @@ import {CustomTextInput} from '../../../components';
 import {Colors, moderateScale, verticalScale} from '../../../theme';
 import {styles} from './LoginStyles';
 import {useLogin} from './useLogin';
-import {Strings} from '../../../constants';
+import {NavigationRoutes, Strings} from '../../../constants';
 import {Eye, EyeClosed, EyeSlash, Heart} from 'phosphor-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const {
@@ -29,8 +30,8 @@ const LoginScreen = () => {
     navigateToSignup,
     navigateToForgotPassword,
   } = useLogin();
-  const {handleSubmit, errors, touched, values, handleChange, handleBlur} =
-    formik;
+  const {handleSubmit, errors, touched, values, handleChange, handleBlur} = formik;
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={styles.main}>
@@ -140,7 +141,7 @@ const LoginScreen = () => {
           </Pressable>
         </View>
       </View>
-      <TouchableOpacity onPress={handleSubmit}>
+      <TouchableOpacity onPress={() => navigation.replace(NavigationRoutes.drawerRoutes)}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{Strings.signIn}</Text>
         </View>

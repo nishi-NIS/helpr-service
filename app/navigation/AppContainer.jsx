@@ -1,10 +1,11 @@
-import {createStackNavigator} from '@react-navigation/stack';
-import React, {useEffect, useState} from 'react';
-import {NavigationRoutes} from '../constants';
+import { createStackNavigator } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
+import { NavigationRoutes } from '../constants';
 import AuthTopTabs from './AuthTopTabs';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import DrawerRoutes from './DrawerRoutes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LoginScreen } from '../modules';
 
 const RootStack = createStackNavigator();
 
@@ -28,16 +29,14 @@ const AppContainer = () => {
             component={AuthTopTabs}
             options={{
               headerShown: false,
-            }}
-          />
+            }} />
         ) : (
           <RootStack.Screen
             name={NavigationRoutes.drawerRoutes}
             component={DrawerRoutes}
             options={{
               headerShown: false,
-            }}
-          />
+            }} />
         )}
       </RootStack.Navigator>
     </NavigationContainer>

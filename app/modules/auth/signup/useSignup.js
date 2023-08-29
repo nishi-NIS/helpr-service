@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { ActivityIndicator, PermissionsAndroid, StyleSheet } from "react-native";
 import { useFormik } from "formik";
 import { useNavigation } from '@react-navigation/native';
-import { NavigationRoutes, SignupValidationSchema, SignupValidationSchema2 } from "../../../constants";
+import { EndPoints, NavigationRoutes, SignupValidationSchema, SignupValidationSchema2 } from "../../../constants";
 import { API_URL } from "../../../config";
 import { useDispatch, useSelector } from 'react-redux';
 import { SignUpUser } from "../../../redux/auth/AuthService";
@@ -21,12 +21,211 @@ export default useSignup = () => {
 
     const [imageSource, setImageSource] = React.useState('');
     const [showCamera, setShowCamera] = React.useState(false);
+    const [acceptTerms, setAcceptTerms] = React.useState(false);
+    const [value, setValue] = React.useState({
+        profilePic: Images.loginBG,
+        firstName: 'Nishi',
+        lastName: 'Vanani',
+        email: 'nishivanani@gmail.com',
+        phone: '7041902666',
+        password: 'Nishi@123',
+        confirmPassword: 'Nishi@123',
+    });
+    // console.log("value---", value)
     // const devices = useCameraDevices('wide-angle-camera');
     const devices = useCameraDevices();
     // const device = devices.back;
     const camera = useRef(null);
 
-    // useEffect(() => {
+    const [serviceList, setServiceList] = React.useState('');
+    const [serviceArray, setServiceArray] = React.useState('');
+    const [serviceId, setServiceId] = React.useState('');
+    // console.log("serviceId", serviceId)
+
+    const fetchServiceOptions = () => {
+        let requestOptions = {
+            method: 'GET',
+        };
+
+        fetch(API_URL + EndPoints.services, requestOptions)
+            .then(response => {
+                return response.json()
+            })
+            .then((data) => {
+                // console.log("data", data?.services)
+                setServiceArray(data?.services)
+            })
+            .catch(error => {
+                console.log('Error fetching service options:', error);
+            })
+    };
+
+    let services = [
+        {
+            "id": serviceId,
+            "value": "0"
+        }
+    ];
+
+    const takePicture = async () => {
+        if (camera != null) {
+            const photo = await camera.current.takePhoto();
+            console.log("photo", photo.path);
+            setImageSource(photo.path);
+            setShowCamera(false);
+        }
+    };
+
+    const initialValues = {
+        profilePic: Images.loginBG,
+        firstName: 'Nishi',
+        lastName: 'Vanani',
+        email: 'nishivanani6@gmail.com',
+        phone: '7041902666',
+        password: 'Nishi@123',
+        confirmPassword: 'Nishi@123',
+    };
+
+    const initialValues2 = {
+        businessLicense: Images.loginBG,
+        passportOrLicense: Images.loginBG,
+        services: '',
+        signature: 'Nishi',
+    };
+
+    const onSubmit = (values) => {
+        setErrorMessage(false);
+        var firstScreenValues = {
+            profilePic: values?.profilePic,
+            firstName: values?.firstName,
+            lastName: values?.lastName,
+            email: values?.email,
+            phone: values?.phone,
+            password: values?.password,
+            confirmPassword: values?.confirmPassword,
+        };
+        setValue(firstScreenValues);
+        navigation.navigate(NavigationRoutes.signup2)
+    };
+
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: SignupValidationSchema,
+        // enableReinitialize: true,
+        onSubmit: onSubmit
+    });
+
+    const handleOnSubmit = (values) => {
+        setErrorMessage(false);
+        let myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'multipart/form-data');
+        console.log('value', value)
+
+        let raw = JSON.stringify({
+            ...value,
+            businessLicense: values.businessLicense,
+            passportOrLicense: values.passportOrLicense,
+            services: values.services,
+            signature: values.signature,
+            services
+        });
+        console.log("raw", raw)
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow',
+        };
+
+        fetch(API_URL + 'signup', requestOptions)
+            .then(response => {
+                console.log("response", response);
+                return response.json();
+            })
+            .then(async result => {
+                console.log("result", result)
+            })
+            .catch(error => {
+                // Handle error here (e.g., show error message)
+                console.log('error--', error);
+            })
+
+            //   if (!result.status) {
+            //     setErrorMessage(result.message);
+            //   } else {
+            //     navigation.navigate(NavigationRoutes.otpScreen, {
+            //       headersLable: 'Verify Email',
+            //       headersSub: 'OTP has been sent on Emai',
+            //     //   resend: this.OTPResend,
+            //     //   verify: this.OTPVerify,
+            //     //   backToLogin: false,
+            //     });
+            //   }
+            //   // Handle API response here (e.g., show success message)
+            //   console.log(result);
+
+            .catch(error => {
+                // Handle error here (e.g., show error message)
+                console.log('error--', error);
+            });
+    };
+
+    const formik2 = useFormik({
+        initialValues: initialValues2,
+        validationSchema: SignupValidationSchema2,
+        // enableReinitialize: true,
+        onSubmit: handleOnSubmit
+    });
+
+    return {
+        navigation,
+        formik,
+        navigateToSignIn,
+        navigateGoBack,
+        navigateToSignup2,
+        focused,
+        ErrorMessage,
+        setErrorMessage,
+        formik2,
+        serviceList,
+        setServiceList,
+        serviceArray,
+        setServiceArray,
+        fetchServiceOptions,
+        serviceId,
+        setServiceId
+        // requestCameraPermission
+    };
+};
+
+
+
+ // const requestCameraPermission = async () => {
+    //     try {
+    //         const granted = await PermissionsAndroid.request(
+    //             PermissionsAndroid.PERMISSIONS.CAMERA
+    //         );
+    //         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //             console.log('You can use the camera');
+    //             if (device == null)
+    //                 return (
+    //                     <Camera
+    //                         style={StyleSheet.absoluteFill}
+    //                         device={device}
+    //                         isActive={true}
+    //                     />
+    //                 )
+    //         } else {
+    //             console.log('Camera permission denied');
+    //         }
+    //     } catch (err) {
+    //         console.warn(err);
+    //     }
+    // };
+
+
+ // useEffect(() => {
     //     checkPermissions();
     // }, []);
 
@@ -67,201 +266,3 @@ export default useSignup = () => {
     //     const cameraPermission = await Camera.getCameraPermissionStatus();
     //     console.log("cameraPermission", cameraPermission)
     // };
-
-    const takePicture = async () => {
-        if (camera != null) {
-            const photo = await camera.current.takePhoto();
-            console.log("photo", photo.path);
-            setImageSource(photo.path);
-            setShowCamera(false);
-        }
-    };
-
-    // const requestCameraPermission = async () => {
-    //     try {
-    //         const granted = await PermissionsAndroid.request(
-    //             PermissionsAndroid.PERMISSIONS.CAMERA
-    //         );
-    //         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //             console.log('You can use the camera');
-    //             if (device == null)
-    //                 return (
-    //                     <Camera
-    //                         style={StyleSheet.absoluteFill}
-    //                         device={device}
-    //                         isActive={true}
-    //                     />
-    //                 )
-    //         } else {
-    //             console.log('Camera permission denied');
-    //         }
-    //     } catch (err) {
-    //         console.warn(err);
-    //     }
-    // };
-
-    const initialValues = {
-        profilePic: Images.loginBG,
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        password: '',
-        confirmPassword: '',
-    };
-
-    const initialValues2 = {
-        businessLicense: Images.loginBG,
-        passportOrLicense: Images.loginBG,
-        services: '',
-        signature: '',
-        acceptTerms: false,
-    };
-
-    const onSubmit = () => {
-        // dispatch(SignUpUser());
-        navigation.navigate(NavigationRoutes.signup2)
-    };
-
-    const formik = useFormik({
-        initialValues: initialValues,
-        validationSchema: SignupValidationSchema,
-        // enableReinitialize: true,
-        onSubmit: onSubmit
-        // onSubmit: getNewUser
-        // onSubmit: async values => {
-        //     setErrorMessage(false);
-
-        //     let myHeaders = new Headers();
-        //     myHeaders.append('Content-Type', 'application/json');
-
-        //     let raw = JSON.stringify({
-        //         firstName: values.firstName,
-        //         lastName: values.lastName,
-        //         email: values.email,
-        //         phone: values.phone,
-        //         password: values.password,
-        //         confirmPassword: values.confirmPassword,
-        //     });
-
-        //     // let requestOptions = {
-        //     //     method: 'POST',
-        //     //     headers: myHeaders,
-        //     //     body: raw,
-        //     //     redirect: 'follow',
-        //     // };
-
-        //     // fetch(API_URL + 'signup', requestOptions)
-        //     //     .then(response => response.json())
-        //     //     .then(async result => {
-        //     //         console.log(result);
-        //     //         if (
-        //     //             result.message ===
-        //     //             'User was registered successfully! Please check email to verify your account.'
-        //     //         ) {
-        //     //             await AsyncStorage.setItem('emailId', values.email);
-        //     //             navigation.navigate(NavigationRoutes.otpScreen);
-        //     //         } else {
-        //     //             console.log('IN');
-        //     //             setErrorMessage(result.message);
-        //     //         }
-        //     //     })
-        //     //     .catch(error => console.log('error', error));
-
-        //     // let myHeaders = new Headers();
-        //     // myHeaders.append('Content-Type', 'multipart/form-data');
-
-        //     let requestOptions = {
-        //         method: 'POST',
-        //         //   body: formdata,
-        //         redirect: 'follow',
-        //         headers: myHeaders,
-        //     };
-
-        //     fetch(API_URL + 'signup', requestOptions)
-        //         .then(response => response.json())
-        //         .then(result => {
-        //             // if (!result.status) {
-        //             //     errorToast(result.message);
-        //             // } 
-        //             if (
-        //                 result.message ===
-        //                 'User was registered successfully! Please check email to verify your account.'
-        //             ) {
-        //                 // await AsyncStorage.setItem('emailId', values.email);
-        //                 navigation.navigate(NavigationRoutes.otpScreen);
-        //             }
-        //             else {
-        //                 navigation.navigate(NavigationRoutes.otpScreen, {
-        //                     headersLable: 'Verify Email',
-        //                     headersSub: 'OTP has been sent on Emai',
-        //                     resend: this.OTPResend,
-        //                     verify: this.OTPVerify,
-        //                     backToLogin: false,
-        //                 });
-        //             }
-        //             // Handle API response here (e.g., show success message)
-        //             console.log(result);
-        //         })
-        //         .catch(error => {
-        //             // Handle error here (e.g., show error message)
-        //             console.log('error', error);
-        //         });
-        // },
-    });
-
-    const handleOnSubmit = () => {
-        console.log("prtessed")
-        const user = {
-            profilePic: values.profilePic,
-            firstName: values?.firstname,
-            lastName: values?.lastname,
-            email: values?.email,
-            phone: values?.phone,
-            password: values?.password,
-            confirmPassword: values?.confirmPassword,
-            businessLicense: values?.businessLicense,
-            passportOrLicense: values?.passportOrLicense,
-            services: values?.services,
-            signature: values?.signature,
-            acceptTerms: values?.acceptTerms,
-        };
-        const validUser = dispatch(SignUpUser(user));
-        validUser
-            .then((response) => {
-                console.log("response--", response)
-
-                // if (response.error) {
-                //     console.log("----error----", response.error. message)
-                // }
-                // else {
-                //     navigation.navigate(NavigationRoutes.signup2)
-                // }
-            })
-            .catch((error) => {
-                console.log("catch error", error)
-            })
-        // console.log("newUser", newUser);
-    };
-    // };
-
-    const formik2 = useFormik({
-        initialValues: initialValues2,
-        validationSchema: SignupValidationSchema2,
-        // enableReinitialize: true,
-        onSubmit: handleOnSubmit
-    });
-
-    return {
-        navigation,
-        formik,
-        navigateToSignIn,
-        navigateGoBack,
-        navigateToSignup2,
-        focused,
-        ErrorMessage,
-        setErrorMessage,
-        formik2,
-        // requestCameraPermission
-    };
-};

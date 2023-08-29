@@ -12,6 +12,9 @@ import CheckBox from "@react-native-community/checkbox";
 import useSign2 from "./useSign2";
 import useSignup from "./useSignup";
 import { APIConfig } from "../../../config/APIConfig";
+import { CustomTextInput } from "../../../components";
+import { Header } from "@react-navigation/stack";
+import { API_URL } from "../../../config";
 
 const SignupScreen2 = () => {
     const navigation = useNavigation();
@@ -27,19 +30,6 @@ const SignupScreen2 = () => {
     //     setShowDropdown(false);
     // };
 
-    const [serviceList, setServiceList] = React.useState('');
-
-    useEffect(() => {
-        APIConfig.get(EndPoints.services)
-            .then((response) => {
-                console.log("---services", response?.data?.services);
-                setServiceList(response?.data?.services)
-            })
-            .catch((error) => {
-                console.log("service error----", error)
-            })
-    }, [])
-
     const {
         selectedValue,
         setSelectedValue,
@@ -52,8 +42,21 @@ const SignupScreen2 = () => {
         navigateBack,
         navigateToOtpScreen
     } = useSign2();
-    const { formik2 } = useSignup();
+
+    const { formik2, 
+        serviceList, 
+        setServiceList,
+        serviceArray, 
+        setServiceArray,
+        fetchServiceOptions,
+        serviceId, 
+        setServiceId
+     } = useSignup();
     const { handleSubmit, errors, touched, values, handleChange, handleBlur } = formik2;
+
+    useEffect(() => {
+        fetchServiceOptions();
+    }, [])
 
     return (
         <ScrollView style={styles.main} >
@@ -99,10 +102,10 @@ const SignupScreen2 = () => {
             <View style={styles.dropdownContainer}>
                 <Pressable onPress={() => setShowDropdown(true)}>
                     <View style={styles.dropdownInnerView} >
-                        {selectedValue ? (
+                        {serviceList ? (
                             <Text
                                 style={styles.dropdownTextSelected} >
-                                {selectedValue}
+                                {serviceList}
                             </Text>
                         ) : (
                             <Text
@@ -140,21 +143,22 @@ const SignupScreen2 = () => {
                                 </Pressable>
                             ))} */}
                             <FlatList
-                            data={serviceList}
-                            renderItem={({item}) => {
-                                return(
-                                    <Pressable
-                                    // key={item}
-                                    style={styles.option}
-                                     onPress={() => {
-                                        console.log("item", item.name)
-                                        setServiceList(item)
-                                        setShowDropdown(false);
-                                        }} >
-                                    <Text style={{ color: Colors.black }}>{item.name}</Text>
-                                    </Pressable>
-                                )
-                            }}
+                                data={serviceArray}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <Pressable
+                                            // key={item}
+                                            style={styles.option}
+                                            onPress={() => {
+                                                console.log("item", item._id)
+                                                setServiceList(item.name)
+                                                setServiceId(item._id)
+                                                setShowDropdown(false);
+                                            }} >
+                                            <Text style={{ color: Colors.black }}>{item.name}</Text>
+                                        </Pressable>
+                                    )
+                                }}
                             />
                             <Pressable onPress={() => setShowDropdown(false)}>
                                 <Text style={{ color: Colors.black, }} >Close</Text>
@@ -175,7 +179,7 @@ const SignupScreen2 = () => {
                     borderRadius: moderateScale(8),
                     backgroundColor: Colors.offWhite,
                 }} >
-                    <TextInput
+                    <CustomTextInput
                         placeholder={Strings.electronicSignature}
                         placeholderTextColor={Colors.gray}
                         secureTextEntry={false}
@@ -184,14 +188,48 @@ const SignupScreen2 = () => {
                         handleChange={handleChange}
                         handleBlur={handleBlur}
                         formik={formik2}
+                        maxLength={10}
+                        style={styles.textInput}
+                    />
+                    {/* <TextInput
+                        placeholder={Strings.electronicSignature}
+                        placeholderTextColor={Colors.gray}
+                        secureTextEntry={false}
+                        keyboardType="default"
+                        name="signature"
+                        onBlur={handleBlur("signature")}
+                        onChangeText={handleChange("signature")}
+                        formik={formik2}
                         style={{
                             color: Colors.black,
                             fontWeight: '500',
                             flex: 1,
                             textAlignVertical: "center",
                         }}
-                    />
+                    /> */}
                 </View>
+                <View style={styles.errorView}>
+                    {touched.signature && errors.signature && (
+                        <Text style={styles.errorText}>{errors.signature}</Text>
+                    )}
+                </View>
+
+                {/* <TextInput
+                        placeholder={Strings.electronicSignature}
+                        placeholderTextColor={Colors.gray}
+                        secureTextEntry={false}
+                        keyboardType="default"
+                        name="signature"
+                        onBlur={handleBlur("signature")}
+                        onChangeText={handleChange("signature")}
+                        formik={formik2}
+                        style={{
+                            color: Colors.black,
+                            fontWeight: '500',
+                            flex: 1,
+                            textAlignVertical: "center",
+                        }}
+                    /> */}
             </View>
             {/* <View style={styles.outerTextInputView} >
                 <View style={styles.textInputView} >
@@ -232,7 +270,8 @@ const SignupScreen2 = () => {
                 </View>
             </View>
             <Text style={styles.confirmContract} >{Strings.confirmContract}</Text>
-            <TouchableOpacity onPress={() =>
+            <TouchableOpacity onPress={
+                //  () => console.log("Press")
                 // navigateToOtpScreen
                 handleSubmit
             } >

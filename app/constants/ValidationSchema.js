@@ -54,5 +54,5 @@ export const SignupValidationSchema2 = Yup.object().shape({
 
   signature: Yup.string().required(Strings.signatureRequired),
 
-  acceptTerms: Yup.string().required(Strings.acceptTermsRequired),
+  // acceptTerms: Yup.string().required(Strings.acceptTermsRequired),
 });

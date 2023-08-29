@@ -10,6 +10,7 @@ import {
   SignupScreen,
   SignupScreen2,
 } from '../modules';
+import DrawerRoutes from './DrawerRoutes';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -61,6 +62,13 @@ const AuthTopTabs = () => {
       <AuthStack.Screen
         name={NavigationRoutes.resetPasswordScreen}
         component={ResetPasswordScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AuthStack.Screen
+        name={NavigationRoutes.drawerRoutes}
+        component={DrawerRoutes}
         options={{
           headerShown: false,
         }}

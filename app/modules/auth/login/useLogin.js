@@ -45,13 +45,14 @@ export const useLogin = () => {
     fetch(API_URL + 'login', requestOptions)
       .then(response => response.json())
       .then(async result => {
+        console.log(result);
         if (result.token) {
+          console.log("token", token)
           await AsyncStorage.setItem('token', result.token);
           navigation.replace(NavigationRoutes.drawerRoutes);
         } else {
           setErrorMessage(result.message);
         }
-        console.log(result);
       })
       .catch(error => console.log('error', error));
   };

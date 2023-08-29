@@ -36,8 +36,7 @@ const SignupScreen = () => {
     setErrorMessage,
     requestCameraPermission,
   } = useSignup();
-  const {handleSubmit, errors, touched, values, handleChange, handleBlur} =
-    formik;
+  const {handleSubmit, errors, touched, values, handleChange, handleBlur} = formik;
 
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [showImageModal, setShowImageModal] = React.useState(false);
@@ -276,6 +275,7 @@ const SignupScreen = () => {
           <CustomTextInput
             placeholder={Strings.mobileNumber}
             secureTextEntry={false}
+            maxLength={10}
             keyboardType="number-pad"
             name="phone"
             handleChange={handleChange}
