@@ -141,7 +141,10 @@ const LoginScreen = () => {
           </Pressable>
         </View>
       </View>
-      <TouchableOpacity onPress={() => navigation.replace(NavigationRoutes.drawerRoutes)}>
+      <TouchableOpacity onPress={
+        handleSubmit
+        // navigation.replace(NavigationRoutes.drawerRoutes)
+        }>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{Strings.signIn}</Text>
         </View>

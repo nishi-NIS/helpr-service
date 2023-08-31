@@ -107,6 +107,7 @@ export const styles = StyleSheet.create({
         fontSize: moderateScale(14),
         fontWeight: '500',
         paddingHorizontal: horizontalScale(12),
+        color: Colors.black,
     },
     dualView: {
         flexDirection: "row",

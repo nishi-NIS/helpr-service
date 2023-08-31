@@ -10,6 +10,7 @@ export const useLogin = () => {
   const [isSelected, setIsSelected] = React.useState(false);
   const [ErrorMessage, setErrorMessage] = React.useState('');
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+  // const []
   const focused = true;
 
   const navigateToSignup = () => navigation.navigate(NavigationRoutes.signup);
@@ -26,6 +27,7 @@ export const useLogin = () => {
   };
 
   const onSubmit = values => {
+    console.log('Pressed');
     setErrorMessage(false);
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -34,6 +36,7 @@ export const useLogin = () => {
       email: values.email,
       password: values.password,
     });
+    console.log('login raw', raw);
 
     let requestOptions = {
       method: 'POST',
@@ -45,22 +48,24 @@ export const useLogin = () => {
     fetch(API_URL + 'login', requestOptions)
       .then(response => response.json())
       .then(async result => {
-        console.log(result);
+        console.log('result', result.token);
         if (result.token) {
-          console.log("token", token)
+          console.log('token', result.token);
           await AsyncStorage.setItem('token', result.token);
           navigation.replace(NavigationRoutes.drawerRoutes);
         } else {
+          console.log('result.message', result.message);
           setErrorMessage(result.message);
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log('Error while Login', error));
   };
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: LoginValidationSchema,
     onSubmit: onSubmit,
+    // onSubmit: () => console.log("onSubmit")
   });
 
   return {
