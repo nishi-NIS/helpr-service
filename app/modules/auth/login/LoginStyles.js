@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         width: horizontalScale(375),
         borderTopLeftRadius: moderateScale(12),
         borderTopRightRadius: moderateScale(12),
-        marginTop: verticalScale(38)
+        marginTop: verticalScale(16)
     },
     welcomeView: {
         alignItems: "center",
@@ -61,44 +61,49 @@ export const styles = StyleSheet.create({
         borderColor: Colors.theme,
         height: verticalScale(50),
         borderRadius: moderateScale(8),
+        borderWidth:moderateScale(1),
         backgroundColor: Colors.offWhite,
+        justifyContent: "center"
     },
     textInput: {
-        fontSize: moderateScale(16),
+        fontSize: moderateScale(12),
         color: Colors.black,
-        fontWeight: '400',
+        fontWeight: '500',
         flex: 1,
     },
     errorView: {
-        paddingHorizontal: horizontalScale(4)
+        paddingHorizontal: horizontalScale(20),
+        top: verticalScale(-5)
     },
     errorText: {
         color: Colors.red,
         fontSize: moderateScale(10),
+        fontWeight: '500',
     },
     rememberMeView: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: moderateScale(15),
     },
     rememberMe: {
         flex: 1,
-        marginLeft: horizontalScale(4),
+        marginLeft: horizontalScale(14),
         marginTop: verticalScale(-8)
     },
     label: {
-        marginVertical: verticalScale(8),
-        color: Colors.theme,
+        // marginVertical: verticalScale(5),
+        color: Colors.gray,
+        fontSize: moderateScale(10),
+        fontWeight: '500',
     },
     checkboxContainer: {
         flexDirection: 'row',
+        alignItems: "center",
     },
     checkbox: {
-        marginTop: verticalScale(2),
+        // marginRight: horizontalScale(10),
         borderColor: Colors.theme,
         borderRadius: moderateScale(5),
-        transform: [{ scaleX: horizontalScale(0.8) }, { scaleY: verticalScale(0.8) }],
+        transform: [{ scaleX: moderateScale(0.8) }, { scaleY: moderateScale(0.8) }],
     },
     forgotPassword: {
         flex: 1,
@@ -108,7 +113,8 @@ export const styles = StyleSheet.create({
     forgetPasswordText: {
         color: Colors.theme,
         textDecorationLine: 'underline',
-        fontWeight: '500'
+        fontWeight: '500',
+        fontSize: moderateScale(11),
     },
     button: {
         backgroundColor: Colors.theme,
@@ -123,9 +129,11 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontWeight: '600',
+        fontSize: moderateScale(16),
     },
     createAccount: {
         textAlign: 'center',
+        fontSize: moderateScale(12),
         color: Colors.theme,
         textDecorationLine: 'underline',
         fontWeight: '600',

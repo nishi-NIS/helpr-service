@@ -145,7 +145,7 @@ export default useSignup = () => {
       redirect: 'follow',
     };
 
-    fetch(API_URL + 'signup', requestOptions)
+    fetch(API_URL + EndPoints.signUp, requestOptions)
       .then(response => {
         console.log('response', response);
         return response.json();
