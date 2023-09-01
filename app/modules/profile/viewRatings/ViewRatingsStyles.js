@@ -131,7 +131,7 @@ export const styles = StyleSheet.create({
     nameTextView: {
         // marginHorizontal: horizontalScale(10),
         justifyContent: "center",
-        right: horizontalScale(60),
+        right: horizontalScale(60)
     },
     ratingsView: {
         flexDirection: "row",

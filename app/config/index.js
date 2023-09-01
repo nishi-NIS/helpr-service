@@ -3,5 +3,5 @@
 //   };
 
 module.exports = {
-  API_URL: 'http://54.201.160.69:9210/api/',
+  API_URL: 'http://54.201.160.69:9210/api/provider/',
 };

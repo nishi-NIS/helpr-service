@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         width: horizontalScale(375),
         borderTopLeftRadius: moderateScale(12),
         borderTopRightRadius: moderateScale(12),
-        marginTop: verticalScale(16)
+        marginTop: verticalScale(38)
     },
     image: {
         justifyContent: 'center',
@@ -29,23 +29,12 @@ export const styles = StyleSheet.create({
     container: {
         flex: 3,
     },
-    welcomeView: {
-        alignItems: "center",
-        padding: moderateScale(15)
-    },
     welcomeText: {
         textAlign: 'center',
+        fontSize: moderateScale(20),
+        fontWeight: 'bold',
         color: Colors.theme,
         marginVertical: verticalScale(20),
-        fontSize: moderateScale(24),
-        fontWeight: '600',
-        color: Colors.theme
-    },
-    subWelcomeText: {
-        fontSize: moderateScale(16),
-        color: Colors.black,
-        textAlign: "center",
-        marginTop: verticalScale(25)
     },
     welcomeInfo: {
         textAlign: 'center',
@@ -80,8 +69,6 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.offWhite,
         paddingLeft: horizontalScale(12),
         color: Colors.black,
-        fontSize: moderateScale(12),
-        fontWeight: '500',
     },
     // rememberMeView: {
     //     flexDirection: 'row',
@@ -113,8 +100,7 @@ export const styles = StyleSheet.create({
     errorText: {
         marginHorizontal: horizontalScale(20),
         color: Colors.red,
-        fontSize: moderateScale(11),
-        marginTop: verticalScale(2),
+        fontSize: moderateScale(12),
     },
     error: {
         marginHorizontal: horizontalScale(20),
@@ -124,7 +110,6 @@ export const styles = StyleSheet.create({
     },
     createAccount: {
         textAlign: 'center',
-        fontSize: moderateScale(12),
         color: Colors.theme,
         textDecorationLine: 'underline',
         fontWeight: '600',
@@ -142,6 +127,5 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontWeight: '600',
-        fontSize: moderateScale(16),
     },
 });

@@ -16,7 +16,7 @@ import {styles} from './LoginStyles';
 import {useLogin} from './useLogin';
 import {NavigationRoutes, Strings} from '../../../constants';
 import {Eye, EyeClosed, EyeSlash, Heart} from 'phosphor-react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const {
@@ -30,8 +30,7 @@ const LoginScreen = () => {
     navigateToSignup,
     navigateToForgotPassword,
   } = useLogin();
-  const {handleSubmit, errors, touched, values, handleChange, handleBlur} =
-    formik;
+  const {handleSubmit, errors, touched, values, handleChange, handleBlur} = formik;
   const navigation = useNavigation();
 
   return (
@@ -75,12 +74,12 @@ const LoginScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.email && errors.email && (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.email && errors.email && (
-          <Text style={styles.errorText}>{errors.email}</Text>
-        )}
       </View>
       <View style={styles.outerTextInputView}>
         <View style={styles.textInputView}>
@@ -113,12 +112,12 @@ const LoginScreen = () => {
               </Pressable>
             </View>
           </View>
+          <View style={styles.errorView}>
+            {touched.password && errors.password && (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.password && errors.password && (
-          <Text style={styles.errorText}>{errors.password}</Text>
-        )}
       </View>
       <View style={styles.rememberMeView}>
         <View style={styles.rememberMe}>
@@ -142,10 +141,9 @@ const LoginScreen = () => {
           </Pressable>
         </View>
       </View>
-      <TouchableOpacity
-        onPress={
-          handleSubmit
-          // navigation.replace(NavigationRoutes.drawerRoutes)
+      <TouchableOpacity onPress={
+        handleSubmit
+        // navigation.replace(NavigationRoutes.drawerRoutes)
         }>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{Strings.signIn}</Text>

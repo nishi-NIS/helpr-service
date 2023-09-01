@@ -288,15 +288,7 @@ useEffect(() => {
         >
           <View style={styles.modalOuterView}>
             <View style={styles.modalInnerView}>
-              <View style={{alignSelf: "flex-end"}} >
-                <Pressable onPress={() => {
-                    setShowModal(false);
-                    setShowBackgroundModal(false);
-                  }} >
-            <X size={moderateScale(14)} color={Colors.black} weight='bold' />
-            </Pressable>
-            </View>
-             <Text style={styles.changePasswordText}>
+              <Text style={styles.changePasswordText}>
                 {Strings.changePassword}
               </Text>
               <Pressable>

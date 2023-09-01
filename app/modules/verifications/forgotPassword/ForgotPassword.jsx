@@ -20,7 +20,7 @@ import Images from '../../../assests';
 import {API_URL} from '../../../config';
 import {Colors} from '../../../theme';
 import {styles} from './ForgotPasswordStyles';
-import {EndPoints, NavigationRoutes, Strings} from '../../../constants';
+import {NavigationRoutes, Strings} from '../../../constants';
 
 const ForgotPasswordScreen = () => {
   const navigation = useNavigation();
@@ -56,7 +56,7 @@ const ForgotPasswordScreen = () => {
         redirect: 'follow',
       };
 
-      fetch(API_URL + EndPoints.forgotPassword, requestOptions)
+      fetch(API_URL + 'forgotPassword', requestOptions)
         .then(response => response.json())
         .then(async result => {
           console.log(result);
@@ -73,7 +73,7 @@ const ForgotPasswordScreen = () => {
   });
 
   return (
-    <>
+    <ScrollView style={styles.main}>
       <StatusBar
         animated={true}
         backgroundColor={Colors.statusBar}
@@ -83,10 +83,8 @@ const ForgotPasswordScreen = () => {
       />
       <Image source={Images.loginBG} style={styles.topImage} />
       <View style={styles.container}>
-        <View style={styles.welcomeView}>
         <Text style={styles.welcomeText}>{Strings.forgotPassword}</Text>
-        <Text style={styles.subWelcomeText}>{Strings.welcomeText}</Text>
-      </View>
+        <Text style={styles.welcomeInfo}>{Strings.welcomeText}</Text>
         {/* Input fields for email and password */}
         <TextInput
           style={styles.textInput}
@@ -111,7 +109,7 @@ const ForgotPasswordScreen = () => {
           {Strings.doNotHaveAccount}
         </Text>
       </View>
-    </>
+    </ScrollView>
   );
 };
 

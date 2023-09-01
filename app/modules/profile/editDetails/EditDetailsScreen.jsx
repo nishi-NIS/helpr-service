@@ -38,91 +38,91 @@ const EditDetailsScreen = () => {
     getProfile();
   }, []);
 
-  console.log('|||||||||||', userProfile);
+//   console.log('|||||||||||', userProfile);
 
-  const validationSchema = Yup.object().shape({
-    // firstName: Yup.string(),
-    // lastName: Yup.string(),
-    name: Yup.string(),
-    email: Yup.string(),
-    phone: Yup.string(),
-    location: Yup.string(),
-    addService: Yup.string(),
-    hourlyRate: Yup.string(),
-    cancelationPolicy: Yup.string(),
-  });
+//   const validationSchema = Yup.object().shape({
+//     // firstName: Yup.string(),
+//     // lastName: Yup.string(),
+//     name: Yup.string(),
+//     email: Yup.string(),
+//     phone: Yup.string(),
+//     location: Yup.string(),
+//     addService: Yup.string(),
+//     hourlyRate: Yup.string(),
+//     cancelationPolicy: Yup.string(),
+//   });
 
-  const updateProfile = async formData => {
-    const userData = {
-    //   firstName: userProfile.firstName,
-    //   lastName: userProfile.lastName,
-      email: formik.values.email,
-      phone: formik.values.phone,
-      location: '',
-      addService: '',
-      hourlyRate: '',
-      cancelationPolicy: '',
-    };
+//   const updateProfile = async formData => {
+//     const userData = {
+//     //   firstName: userProfile.firstName,
+//     //   lastName: userProfile.lastName,
+//       email: formik.values.email,
+//       phone: formik.values.phone,
+//       location: '',
+//       addService: '',
+//       hourlyRate: '',
+//       cancelationPolicy: '',
+//     };
 
-    console.log("userData", userData)
-    const headers = {
-      'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + (await getToken()),
-    };
+//     console.log("userData", userData)
+//     const headers = {
+//       'Content-Type': 'multipart/form-data',
+//       Authorization: 'Bearer ' + (await getToken()),
+//     };
 
-    let requestOptions = {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(formData),
-    };
+//     let requestOptions = {
+//       method: 'POST',
+//       headers: headers,
+//       body: JSON.stringify(formData),
+//     };
 
-    fetch(API_URL + EndPoints.updateProfile, requestOptions)
-      .then(response => response.json())
-      .then(data => console.log('updateProfile data', data))
-      .catch(error =>
-        console.log('Error while fetching Update User Profile', error),
-      );
-  };
+//     fetch(API_URL + EndPoints.updateProfile, requestOptions)
+//       .then(response => response.json())
+//       .then(data => console.log('updateProfile data', data))
+//       .catch(error =>
+//         console.log('Error while fetching Update User Profile', error),
+//       );
+//   };
 
-  const formik = useFormik({
-    initialValues: {
-      name: `${userProfile.firstName} ${userProfile.lastName}`,
-      email: userProfile.email,
-      phone: userProfile.phone,
-      location: '',
-      addService: '',
-      hourlyRate: '',
-      cancelationPolicy: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: values => {
-        console.log("values", values)
-      updateProfile(values);
-    },
-  });
+//   const formik = useFormik({
+//     initialValues: {
+//       name: `${userProfile.firstName} ${userProfile.lastName}`,
+//       email: userProfile.email,
+//       phone: userProfile.phone,
+//       location: '',
+//       addService: '',
+//       hourlyRate: '',
+//       cancelationPolicy: '',
+//     },
+//     validationSchema: validationSchema,
+//     onSubmit: values => {
+//         console.log("values", values)
+//       updateProfile(values);
+//     },
+//   });
 
-    const editProfile = async () => {
-      const headers = {
-        'Content-Type': 'multipart/form-data',
-        Authorization: 'Bearer ' + (await getToken()),
-      };
+  //   const editProfile = async () => {
+  //     const headers = {
+  //       'Content-Type': 'multipart/form-data',
+  //       Authorization: 'Bearer ' + (await getToken()),
+  //     };
 
-      let requestOptions = {
-        method: 'POST',
-        headers: headers,
-      };
+  //     let requestOptions = {
+  //       method: 'POST',
+  //       headers: headers,
+  //     };
 
-      fetch(API_URL + EndPoints.updateProfile, requestOptions)
-        .then(response => response.json())
-        .then(data => console.log('updateProfile data', data))
-        .catch(error =>
-          console.log('Error while fetching Update User Profile', error),
-        );
-    };
+  //     fetch(API_URL + EndPoints.updateProfile, requestOptions)
+  //       .then(response => response.json())
+  //       .then(data => console.log('updateProfile data', data))
+  //       .catch(error =>
+  //         console.log('Error while fetching Update User Profile', error),
+  //       );
+  //   };
 
-    useEffect(() => {
-      editProfile();
-    }, []);
+  //   useEffect(() => {
+  //     editProfile();
+  //   }, []);
 
   const handlePressIn = () => {
     Animated.spring(animatedButtonScale, {

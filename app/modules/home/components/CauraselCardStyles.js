@@ -55,8 +55,7 @@ export const styles = StyleSheet.create({
         borderWidth: moderateScale(1),
         backgroundColor: Colors.offWhite,
         color: Colors.black,
-        fontWeight: '500',
-        fontSize: moderateScale(16),
+        fontWeight: '500'
     },
     applyCodeView: {
         flex: 1,
@@ -79,12 +78,10 @@ export const styles = StyleSheet.create({
         marginTop: verticalScale(25),
         textAlign: 'center',
         borderRadius: moderateScale(5),
-        // borderWidth: moderateScale(1),
     },
     btnText: {
-        color: Colors.white,
+        color: 'white',
         textAlign: 'center',
-        fontWeight: '500',
-        fontSize: moderateScale(16),
+        fontWeight: '500'
     },
 });

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Images from '../../../assests';
 import {Colors} from '../../../theme';
-import {EndPoints, NavigationRoutes, Strings} from '../../../constants';
+import {NavigationRoutes, Strings} from '../../../constants';
 import {styles} from './ResetPasswordStyles';
 import {API_URL} from '../../../config';
 import {useNavigation} from '@react-navigation/native';
@@ -58,7 +58,7 @@ const ResetPasswordScreen = () => {
         redirect: 'follow',
       };
 
-      fetch(API_URL + EndPoints.resetPassword, requestOptions)
+      fetch(API_URL + 'resetPassword', requestOptions)
         .then(response => response.json())
         .then(async result => {
           console.log(result);
@@ -84,10 +84,9 @@ const ResetPasswordScreen = () => {
       />
       <Image source={Images.loginBG} style={styles.topImage} />
       <View style={styles.container}>
-      <View style={styles.welcomeView}>
         <Text style={styles.welcomeText}>{Strings.resetPassword}</Text>
-        <Text style={styles.subWelcomeText}>{Strings.welcomeText}</Text>
-      </View>
+        <Text style={styles.welcomeInfo}>{Strings.welcomeText}</Text>
+        {/* Input fields for email and password */}
         <TextInput
           style={styles.textInput}
           placeholder="New Password"

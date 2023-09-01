@@ -36,8 +36,7 @@ const SignupScreen = () => {
     setErrorMessage,
     requestCameraPermission,
   } = useSignup();
-  const {handleSubmit, errors, touched, values, handleChange, handleBlur} =
-    formik;
+  const {handleSubmit, errors, touched, values, handleChange, handleBlur} = formik;
 
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [showImageModal, setShowImageModal] = React.useState(false);
@@ -86,7 +85,7 @@ const SignupScreen = () => {
         <Text style={styles.subWelcomeText}>{Strings.welcomeText}</Text>
       </View>
       <View style={styles.tabTextView}>
-        <Pressable onPress={navigateToSignIn}>
+        <Pressable onPress={navigateGoBack}>
           <Text
             style={
               focused == false ? styles.focusedText : styles.unFocusedText
@@ -103,6 +102,7 @@ const SignupScreen = () => {
       <View style={styles.uploadOuterView}>
         <Pressable
           style={{
+            // borderWidth: 1,
             borderRadius: moderateScale(100),
           }}
           onPress={() => setShowImageModal(true)}>
@@ -112,8 +112,7 @@ const SignupScreen = () => {
               color={Colors.gray}
               //  weight="bold"
             />
-            <Text style={styles.uploadText}>{Strings.uploadProfile}</Text>
-            <Text style={styles.pictureText}>{Strings.picture}</Text>
+            <Text style={styles.uploadText}>{Strings.uploadPic}</Text>
           </View>
           <View style={styles.photoError}>
             {touched.profilePic && errors.profilePic && (
@@ -125,11 +124,39 @@ const SignupScreen = () => {
           transparent={true}
           visible={showImageModal}
           onRequestClose={() => {}}>
-          <View style={styles.modalOuterView}>
-            <View style={styles.modalInnerView}>
-              <Text style={styles.selectOneText}>Select One</Text>
-              <View style={styles.labelView}>
-                <TouchableOpacity
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'center',
+            }}>
+            <View
+              style={{
+                width: 300,
+                backgroundColor: 'white',
+                borderRadius: 10,
+                padding: 10,
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+                elevation: 5,
+              }}>
+              <Text
+                style={{
+                  padding: 10,
+                  color: '#000',
+                  fontSize: 15,
+                  fontWeight: '700',
+                }}>
+                Select One
+              </Text>
+              <TouchableOpacity
+                style={{padding: 10, backgroundColor: '#FBF7FB'}}
                 // onPress={async () => {
                 //     const pickerResult = await ImagePicker.launchCamera({
                 //         mediaType: 'photo',
@@ -145,35 +172,41 @@ const SignupScreen = () => {
                 // }}
                 // onPress={openCameraFunc}
                 // onPress={requestCameraPermission}
-                >
-                  <Text style={styles.labelText}>Open Camera</Text>
-                </TouchableOpacity>
-              </View>
+              >
+                <Text style={{color: Colors.black}}>Open Camera</Text>
+              </TouchableOpacity>
 
-              <View style={styles.labelView}>
+              <TouchableOpacity
+                style={{
+                  padding: 10,
+                  backgroundColor: '#FBF7FB',
+                  marginTop: 10,
+                }}
+                onPress={async () => {
+                  const pickerResult = await ImagePicker.launchImageLibrary({
+                    mediaType: 'photo',
+                    maxHeight: 200,
+                    height: 200,
+                    includeExtra: true,
+                  });
+                  console.log(pickerResult);
+                  if (pickerResult?.assets) {
+                    setSelectedImage({profilePic: pickerResult?.assets[0]});
+                  }
+                  setSelectedImage({isProfile: false});
+                }}>
+                <Text style={{color: Colors.black}}>Open Gallery</Text>
+              </TouchableOpacity>
+              <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
                 <TouchableOpacity
-                  onPress={async () => {
-                    const pickerResult = await ImagePicker.launchImageLibrary({
-                      mediaType: 'photo',
-                      maxHeight: 200,
-                      height: 200,
-                      includeExtra: true,
-                    });
-                    console.log(pickerResult);
-                    if (pickerResult?.assets) {
-                      setSelectedImage({profilePic: pickerResult?.assets[0]});
-                    }
-                    setSelectedImage({isProfile: false});
-                  }}>
-                  <Text style={styles.labelText}>Open Gallery</Text>
+                  style={{
+                    padding: 10,
+                    backgroundColor: '#FFFFFF',
+                    marginTop: 10,
+                  }}
+                  onPress={() => setShowImageModal(false)}>
+                  <Text style={{color: 'black'}}>Cancel</Text>
                 </TouchableOpacity>
-              </View>
-              <View style={styles.cancelView}>
-                <View style={styles.labelView}>
-                  <TouchableOpacity onPress={() => setShowImageModal(false)}>
-                    <Text style={styles.labelText}>Cancel</Text>
-                  </TouchableOpacity>
-                </View>
               </View>
             </View>
           </View>
@@ -192,12 +225,12 @@ const SignupScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.firstName && errors.firstName && (
+              <Text style={styles.errorText}>{errors.firstName}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.firstName && errors.firstName && (
-          <Text style={styles.errorText}>{errors.firstName}</Text>
-        )}
       </View>
       <View style={styles.outerTextInputView}>
         <View style={styles.textInputView}>
@@ -211,12 +244,12 @@ const SignupScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.lastName && errors.lastName && (
+              <Text style={styles.errorText}>{errors.lastName}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.lastName && errors.lastName && (
-          <Text style={styles.errorText}>{errors.lastName}</Text>
-        )}
       </View>
       <View style={styles.outerTextInputView}>
         <View style={styles.textInputView}>
@@ -230,12 +263,12 @@ const SignupScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.email && errors.email && (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.email && errors.email && (
-          <Text style={styles.errorText}>{errors.email}</Text>
-        )}
       </View>
       <View style={styles.outerTextInputView}>
         <View style={styles.textInputView}>
@@ -250,12 +283,12 @@ const SignupScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.phone && errors.phone && (
+              <Text style={styles.errorText}>{errors.phone}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.phone && errors.phone && (
-          <Text style={styles.errorText}>{errors.phone}</Text>
-        )}
       </View>
       <View style={styles.outerTextInputView}>
         <View style={styles.textInputView}>
@@ -269,12 +302,12 @@ const SignupScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.password && errors.password && (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.password && errors.password && (
-          <Text style={styles.errorText}>{errors.password}</Text>
-        )}
       </View>
       <View style={styles.outerTextInputView}>
         <View style={styles.textInputView}>
@@ -288,12 +321,12 @@ const SignupScreen = () => {
             formik={formik}
             style={styles.textInput}
           />
+          <View style={styles.errorView}>
+            {touched.confirmPassword && errors.confirmPassword && (
+              <Text style={styles.errorText}>{errors.confirmPassword}</Text>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.errorView}>
-        {touched.confirmPassword && errors.confirmPassword && (
-          <Text style={styles.errorText}>{errors.confirmPassword}</Text>
-        )}
       </View>
       <TouchableOpacity
         onPress={

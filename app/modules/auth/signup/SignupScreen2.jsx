@@ -92,14 +92,16 @@ const SignupScreen2 = () => {
       <View style={styles.inputOuterView}>
         <View style={styles.inputInnerView}>
           <FilePlus
-            size={moderateScale(30)} color={Colors.gray} />
-          <Text style={styles.inputUploadText}>{Strings.uploadBusiness}</Text>
+            size={moderateScale(30)}
+            // style={styles.inputUploadImg}
+          />
+          <Text style={styles.inputUploadText}>{Strings.uploadPic}</Text>
         </View>
       </View>
       <View style={styles.inputOuterView}>
         <View style={styles.inputInnerView}>
-          <FilePlus size={moderateScale(30)} color={Colors.gray} />
-          <Text style={styles.inputUploadText}>{Strings.uploadPassport}</Text>
+          <FilePlus size={moderateScale(30)} />
+          <Text style={styles.inputUploadText}>{Strings.uploadPic}</Text>
         </View>
       </View>
       <View style={styles.dropdownContainer}>
@@ -117,13 +119,13 @@ const SignupScreen2 = () => {
             {toggleCaret ? (
               <CaretUp
                 size={moderateScale(18)}
-                color={Colors.gray}
+                color={Colors.black}
                 weight="bold"
               />
             ) : (
               <CaretDown
                 size={moderateScale(18)}
-                color={Colors.gray}
+                color={Colors.black}
                 weight="bold"
               />
             )}
@@ -135,8 +137,10 @@ const SignupScreen2 = () => {
           transparent={true}
           propagateSwipe={true}>
           {/* <ScrollView style={{flex: 1}} > */}
-          <View style={styles.modalOuterView2} >
-            <View style={styles.modalView} >
+          <View
+            // style={{ flex: 1, alignItems: "center" }}
+            style={styles.modalOuterView}>
+            <View style={styles.modalView}>
               {/* {serviceArray.map(item => (
                 <Pressable
                   key={item}
@@ -166,7 +170,7 @@ const SignupScreen2 = () => {
                           setServiceId(item._id);
                           setShowDropdown(false);
                         }}>
-                        <Text style={styles.optionText}>{item.name}</Text>
+                        <Text style={{color: Colors.black}}>{item.name}</Text>
                       </Pressable>
                     );
                   }}
@@ -181,28 +185,93 @@ const SignupScreen2 = () => {
             </View>
           </View>
           {/* </ScrollView> */}
+          {/* 9824698725 */}
         </Modal>
       </View>
-      <View style={[{
-        marginTop: verticalScale(12), ...styles.outerTextInputView}]}>
-        <View style={styles.textInputView}>
+      <View style={{marginTop: verticalScale(12)}}>
+        <View
+          style={{
+            paddingHorizontal: horizontalScale(10),
+            marginHorizontal: horizontalScale(10),
+            borderWidth: moderateScale(1),
+            borderColor: Colors.theme,
+            height: verticalScale(45),
+            borderRadius: moderateScale(8),
+            backgroundColor: Colors.offWhite,
+          }}>
           <CustomTextInput
             placeholder={Strings.electronicSignature}
+            placeholderTextColor={Colors.gray}
             secureTextEntry={false}
             keyboardType="default"
             name="signature"
             handleChange={handleChange}
             handleBlur={handleBlur}
             formik={formik2}
+            maxLength={10}
             style={styles.textInput}
           />
+          {/* <TextInput
+                        placeholder={Strings.electronicSignature}
+                        placeholderTextColor={Colors.gray}
+                        secureTextEntry={false}
+                        keyboardType="default"
+                        name="signature"
+                        onBlur={handleBlur("signature")}
+                        onChangeText={handleChange("signature")}
+                        formik={formik2}
+                        style={{
+                            color: Colors.black,
+                            fontWeight: '500',
+                            flex: 1,
+                            textAlignVertical: "center",
+                        }}
+                    /> */}
         </View>
+        <View style={styles.errorView}>
+          {touched.signature && errors.signature && (
+            <Text style={styles.errorText}>{errors.signature}</Text>
+          )}
+        </View>
+
+        {/* <TextInput
+                        placeholder={Strings.electronicSignature}
+                        placeholderTextColor={Colors.gray}
+                        secureTextEntry={false}
+                        keyboardType="default"
+                        name="signature"
+                        onBlur={handleBlur("signature")}
+                        onChangeText={handleChange("signature")}
+                        formik={formik2}
+                        style={{
+                            color: Colors.black,
+                            fontWeight: '500',
+                            flex: 1,
+                            textAlignVertical: "center",
+                        }}
+                    /> */}
       </View>
-      <View style={styles.errorView}>
-        {touched.signature && errors.signature && (
-          <Text style={styles.errorText}>{errors.signature}</Text>
-        )}
-      </View>
+      {/* <View style={styles.outerTextInputView} >
+                <View style={styles.textInputView} >
+                    <CustomTextInput
+                        placeholder={Strings.firstname}
+                        secureTextEntry={false}
+                        keyboardType="default"
+                        name="firstname"
+                        handleChange={handleChange}
+                        handleBlur={handleBlur}
+                        formik={formik}
+                        style={styles.textInput}
+                    />
+                    <View style={styles.errorView} >
+                        {touched.firstname && errors.firstname && (
+                            <Text style={styles.errorText}>
+                                {errors.firstname}
+                            </Text>
+                        )}
+                    </View>
+                </View>
+            </View> */}
       <View style={styles.checkboxContainer}>
         <CheckBox
           value={isSelected}

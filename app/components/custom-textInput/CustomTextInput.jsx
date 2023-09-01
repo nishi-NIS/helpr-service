@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput } from "react-native";
 import { Colors } from "../../theme";
 
-const CustomTextInput = ({placeholder, maxLength, style, name, formik, autoComplete, keyboardType, secureTextEntry}) => {
+const CustomTextInput = ({placeholder, maxLength, name, formik, autoComplete, keyboardType, secureTextEntry}) => {
     const {handleBlur, handleChange} = formik;
 
     return(
@@ -16,8 +16,7 @@ const CustomTextInput = ({placeholder, maxLength, style, name, formik, autoCompl
         secureTextEntry={secureTextEntry}
         autoCapitalize="none"
         maxLength={maxLength}
-        style={style}
-        // style={{color: Colors.black}}
+        style={{color: Colors.black}}
         />
     );
 };

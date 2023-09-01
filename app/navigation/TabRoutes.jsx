@@ -21,11 +21,7 @@ const TabRoutes = () => {
             tabBarOptions={{
                 activeTintColor: Colors.black,
                 inactiveTintColor: Colors.inactiveTintColor,
-                activeBackgroundColor: Colors.tabBackground,
-                labelStyle: {
-                    fontSize: moderateScale(12),
-                    fontWeight: '600',
-                },
+                activeBackgroundColor: Colors.tabBackground
               }}
         >
             <BottomTab.Screen

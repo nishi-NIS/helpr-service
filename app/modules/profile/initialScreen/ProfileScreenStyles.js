@@ -194,7 +194,6 @@ export const styles = StyleSheet.create({
         borderColor: Colors.theme,
         borderWidth: moderateScale(1),
         borderRadius: moderateScale(5),
-        fontSize: moderateScale(12),
         fontWeight: '500',
         paddingLeft: horizontalScale(10),
         color: Colors.black,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useFormik} from 'formik';
-import {EndPoints, LoginValidationSchema, NavigationRoutes} from '../../../constants';
+import {LoginValidationSchema, NavigationRoutes} from '../../../constants';
 import {useNavigation} from '@react-navigation/native';
 import {API_URL} from '../../../config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -45,7 +45,7 @@ export const useLogin = () => {
       redirect: 'follow',
     };
 
-    fetch(API_URL + EndPoints.login, requestOptions)
+    fetch(API_URL + 'login', requestOptions)
       .then(response => response.json())
       .then(async result => {
         console.log('result', result.token);

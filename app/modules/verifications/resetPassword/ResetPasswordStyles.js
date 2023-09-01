@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         width: horizontalScale(375),
         borderTopLeftRadius: moderateScale(12),
         borderTopRightRadius: moderateScale(12),
-        marginTop: verticalScale(16)
+        marginTop: verticalScale(38)
     },
     // image: {
     //     justifyContent: 'center',
@@ -23,13 +23,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.theme,
         marginVertical: verticalScale(20),
-    },
-    subWelcomeText: {
-        fontSize: moderateScale(16),
-        color: Colors.black,
-        textAlign: "center",
-        marginTop: verticalScale(15),
-        marginBottom: verticalScale(25)
     },
     welcomeInfo: {
         textAlign: 'center',
@@ -47,16 +40,11 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.offWhite,
         paddingLeft: horizontalScale(12),
         color: Colors.black,
-        fontSize: moderateScale(12),
-        fontWeight: '500',
-        flex: 1,
     },
     errorText: {
         marginHorizontal: horizontalScale(20),
         color: Colors.red,
-        fontSize: moderateScale(11),
-        fontWeight: '500',
-        top: verticalScale(3),
+        fontSize: moderateScale(12),
     },
     button: {
         backgroundColor: Colors.theme,
@@ -71,11 +59,9 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontWeight: '600',
-        fontSize: moderateScale(16),
     },
     createAccount: {
         textAlign: 'center',
-        fontSize: moderateScale(12),
         color: Colors.theme,
         textDecorationLine: 'underline',
         fontWeight: '600',

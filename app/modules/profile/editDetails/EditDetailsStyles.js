@@ -102,7 +102,6 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: moderateScale(3),
         elevation: moderateScale(1),
-        justifyContent: "center"
     },
     textInput: {
         fontSize: moderateScale(14),
