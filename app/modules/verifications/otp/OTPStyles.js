@@ -5,14 +5,14 @@ import { Colors, horizontalScale, moderateScale, verticalScale } from "../../../
 export const styles = StyleSheet.create({
     rememberMeView: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: moderateScale(15),
-        marginRight: horizontalScale(40),
+        marginHorizontal: horizontalScale(40),
     },
     forgotPassword: {
         flex: 1,
-        alignItems: 'flex-end',
+        // alignItems: 'flex-end',
     },
     borderStyleBase: {
         width: horizontalScale(30),
@@ -23,12 +23,15 @@ export const styles = StyleSheet.create({
         borderColor: Colors.black,
     },
     underlineStyleBase: {
-        width: horizontalScale(65),
+        width: moderateScale(40),
+        height: moderateScale(40),
         borderWidth: moderateScale(1),
         borderColor: Colors.theme,
         borderRadius: moderateScale(10),
         color: Colors.black,
-        backgroundColor: Colors.offWhite
+        backgroundColor: Colors.offWhite,
+        fontSize: moderateScale(14),
+        fontWeight: '500',
     },
     underlineStyleHighLighted: {
         borderColor: Colors.theme,
@@ -59,6 +62,12 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.theme,
         marginVertical: verticalScale(20),
+    },
+    subWelcomeText: {
+        fontSize: moderateScale(16),
+        color: Colors.black,
+        textAlign: "center",
+        marginTop: verticalScale(15)
     },
     welcomeInfo: {
         textAlign: 'center',
@@ -111,6 +120,21 @@ export const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontWeight: '600',
     },
+    timerView: {
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    timerText: {
+        color: Colors.gray,
+        fontWeight: '500',
+        fontSize: moderateScale(12),
+    },
+    resendText: {
+        color: Colors.theme,
+        textDecorationLine: 'underline',
+        fontWeight: '500',
+        fontSize: moderateScale(12),
+    },
     button: {
         backgroundColor: Colors.theme,
         justifyContent: 'center',
@@ -124,18 +148,24 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: Colors.white,
         fontWeight: '600',
+        fontSize: moderateScale(16),
     },
     topImage: {
         height: verticalScale(180),
         width: horizontalScale(375),
         borderTopLeftRadius: moderateScale(12),
         borderTopRightRadius: moderateScale(12),
-        marginTop: verticalScale(38)
+        marginTop: verticalScale(16)
+    },
+    otpView: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     otpText: {
         color: Colors.theme,
         fontWeight: '600',
-        fontSize: moderateScale(17)
+        fontSize: moderateScale(18),
+        marginTop: verticalScale(30)
     },
     error: {
         marginHorizontal: horizontalScale(20),

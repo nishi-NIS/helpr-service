@@ -313,7 +313,7 @@ import {
 import {Colors, verticalScale} from '../../../theme';
 import Images from '../../../assests';
 import {styles} from './forgotPasswordOtpStyles';
-import {NavigationRoutes, Strings} from '../../../constants';
+import {EndPoints, NavigationRoutes, Strings} from '../../../constants';
 import {useNavigation} from '@react-navigation/native';
 import {API_URL} from '../../../config';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
@@ -356,7 +356,7 @@ const ForgotPasswordOtpScreen = () => {
     };
     setShowResendButton(false);
 
-    fetch(API_URL + 'resendOtp', requestOptions)
+    fetch(API_URL + EndPoints.resendOtp, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);
@@ -383,7 +383,7 @@ const ForgotPasswordOtpScreen = () => {
       redirect: 'follow',
     };
 
-    fetch(API_URL + 'checkForgotOtp', requestOptions)
+    fetch(API_URL + EndPoints.checkForgotOtp, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);
